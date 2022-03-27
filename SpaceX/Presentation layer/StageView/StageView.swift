@@ -9,17 +9,17 @@ import UIKit
 
 struct StageViewModel {
     let stageNumber: String
-    let enginesCountText: GeneralInfoViewModel
-    let fuelQuantityText: GeneralInfoViewModel
-    let combustionTimeText: GeneralInfoViewModel
+    let enginesCount: ParameterViewModel
+    let fuelQuantity: ParameterViewModel
+    let combustionTime: ParameterViewModel
 }
 
 final class StageView: UIView {
     
     private let stageNumberLabel = UILabel()
-    private let enginesCountView = GeneralInfoView()
-    private let fuelQuantityView = GeneralInfoView()
-    private let combustionTimeView = GeneralInfoView()
+    private let enginesCountView = ParameterView()
+    private let fuelQuantityView = ParameterView()
+    private let combustionTimeView = ParameterView()
     
     
     override init(frame: CGRect) {
@@ -68,10 +68,10 @@ final class StageView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configStageView(with model: StageViewModel) {
+    func configureStageView(with model: StageViewModel) {
         stageNumberLabel.text = model.stageNumber
-        enginesCountView.configGeneralInfoView(with: model.enginesCountText)
-        fuelQuantityView.configGeneralInfoView(with: model.fuelQuantityText)
-        combustionTimeView.configGeneralInfoView(with: model.combustionTimeText)
+        enginesCountView.configureModel(model.enginesCount)
+        fuelQuantityView.configureModel(model.fuelQuantity)
+        combustionTimeView.configureModel(model.combustionTime)
     }
 }

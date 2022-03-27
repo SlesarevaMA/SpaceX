@@ -2,68 +2,109 @@
 //  GeneralInfoView.swift
 //  SpaceX
 //
-//  Created by Margarita Slesareva on 20.03.2022.
+//  Created by Margarita Slesareva on 24.03.2022.
 //
 
 import UIKit
 
-// повторяющийся код
-
 struct GeneralInfoViewModel {
-    let primary: String
-    let secondary: String
+    let rocketName: String
+    let firstStart: String
+    let countryGeneralInfoView: String
+    let launchCostGeneralInfoView: String
+}
+
+private enum Metrics {
+    static let generalViewVerticalSpacing: CGFloat = 32
 }
 
 final class GeneralInfoView: UIView {
     
-    private let primaryLabel = UILabel()
-    private let secondaryLabel = UILabel()
+    weak var collectionViewDelegate: UICollectionViewDelegate? {
+        get {
+            return rocketParametersCollectionView.delegate
+        }
+        
+        set {
+            rocketParametersCollectionView.delegate = newValue
+        }
+    }
+    weak var dataSource: UICollectionViewDataSource? {
+        get {
+            return rocketParametersCollectionView.dataSource
+        }
+        
+        set {
+            rocketParametersCollectionView.dataSource = newValue
+        }
+    }
+    
+    private let headerView = HeaderView()
+    private let rocketParametersCollectionView = UICollectionView()
+    private let firstStartView = ParameterView()
+    private let countryView = ParameterView()
+    private let launchCostView = ParameterView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(primaryLabel)
-        addSubview(secondaryLabel)
+        addSubview(headerView)
+        addSubview(rocketParametersCollectionView)
+        addSubview(firstStartView)
+        addSubview(countryView)
+        addSubview(launchCostView)
         
-        primaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        secondaryLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        rocketParametersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        firstStartView.translatesAutoresizingMaskIntoConstraints = false
+        countryView.translatesAutoresizingMaskIntoConstraints = false
+        launchCostView.translatesAutoresizingMaskIntoConstraints = false
+
         NSLayoutConstraint.activate([
-            primaryLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            primaryLabel.topAnchor.constraint(equalTo: topAnchor),
-            primaryLabel.trailingAnchor.constraint(
-                greaterThanOrEqualTo: secondaryLabel.leadingAnchor,
-                constant: -GlobalMetrics.horizontalSpacing
+            headerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            headerView.topAnchor.constraint(equalTo: topAnchor),
+            headerView.bottomAnchor.constraint(
+                equalTo: rocketParametersCollectionView.topAnchor,
+                constant: Metrics.generalViewVerticalSpacing
             ),
             
-            secondaryLabel.topAnchor.constraint(equalTo: topAnchor),
-            secondaryLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            secondaryLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
+            rocketParametersCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            rocketParametersCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            rocketParametersCollectionView.bottomAnchor.constraint(
+                equalTo: firstStartView.topAnchor,
+                constant: GlobalMetrics.longVerticalSpacing
+            ),
+            
+            firstStartView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            firstStartView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            firstStartView.bottomAnchor.constraint(
+                equalTo: countryView.topAnchor,
+                constant: GlobalMetrics.verticalSpacing
+            ),
+            
+            countryView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            countryView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            countryView.bottomAnchor.constraint(
+                equalTo: launchCostView.topAnchor,
+                constant: GlobalMetrics.verticalSpacing
+            ),
+
+            launchCostView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            launchCostView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            launchCostView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-        
-        configureLabels()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // повторяющийся код
-    
-    func configGeneralInfoView(with model: GeneralInfoViewModel) {
-        primaryLabel.text = model.primary
-        secondaryLabel.text = model.secondary
+    private func configureGeneralView() {
+        rocketParametersCollectionView.register(
+            RocketParametersViewCell.self,
+            forCellWithReuseIdentifier: "RocketParametersViewCell"
+        )
     }
-
-    // повторяющийся код
     
-    private func configureLabels() {
-        primaryLabel.font = .systemFont(ofSize: 16, weight: .regular)
-        primaryLabel.textAlignment = .left
-        primaryLabel.textColor = GlobalMetricsColors.basicColor
-        
-        secondaryLabel.font = .systemFont(ofSize: 16, weight: .regular)
-        secondaryLabel.textAlignment = .right
-        secondaryLabel.textColor = GlobalMetricsColors.basicTextColor
-    }
 }

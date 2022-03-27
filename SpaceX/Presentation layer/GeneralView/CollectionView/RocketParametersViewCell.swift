@@ -1,5 +1,5 @@
 //
-//  RocketParametersCollectionViewCell.swift
+//  RocketParametersViewCell.swift
 //  SpaceX
 //
 //  Created by Margarita Slesareva on 24.03.2022.
@@ -7,15 +7,14 @@
 
 import UIKit
 
-struct RocketParametersCollectionViewCellModel {
-    let value: Double
-    let parameter: String
-    let unit: String
+private enum Metrics {
+    static let collectionViewCellTopVerticalSpacing: CGFloat = 28
+    static let collectionViewCellBottomVerticalSpacing: CGFloat = 24
 }
 
-final class RocketParametersCollectionViewCell: UICollectionViewCell {
+final class RocketParametersViewCell: UICollectionViewCell {
     
-    /// спросить про reuseIdentifier
+    /// узнать про reuseIdentifier
     
     static let reuseIdentifier = "RocketParametersCollectionViewCell"
     
@@ -40,7 +39,7 @@ final class RocketParametersCollectionViewCell: UICollectionViewCell {
                 constant: GlobalMetrics.shortHorizontalSpacing),
             valueLabel.topAnchor.constraint(
                 equalTo: topAnchor,
-                constant: GlobalMetrics.collectionViewCellTopVerticalSpacing),
+                constant: Metrics.collectionViewCellTopVerticalSpacing),
             valueLabel.bottomAnchor.constraint(equalTo: parameterAndUnitLabel.topAnchor),
             
             parameterAndUnitLabel.leadingAnchor.constraint(
@@ -51,28 +50,28 @@ final class RocketParametersCollectionViewCell: UICollectionViewCell {
                 constant: GlobalMetrics.shortHorizontalSpacing),
             parameterAndUnitLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: GlobalMetrics.collectionViewCellBottomVerticalSpacing)
+                constant: Metrics.collectionViewCellBottomVerticalSpacing)
         ])
         
-        configLabels()
+        configureLabels()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configCell(with model: RocketParametersCollectionViewCellModel) {
+    func configureCell(with model: RocketParametersViewCellModel) {
         valueLabel.text = "\(model.value)"
         parameterAndUnitLabel.text = "\(model.parameter), \(model.unit)"
     }
     
-    private func configLabels() {
+    private func configureLabels() {
         valueLabel.font = .systemFont(ofSize: 16, weight: .bold)
         valueLabel.textAlignment = .center
-        valueLabel.textColor = GlobalMetricsColors.lightTextColor
+        valueLabel.textColor = GlobalMetrics.Colors.lightTextColor
         
         parameterAndUnitLabel.font = .systemFont(ofSize: 14, weight: .regular)
         parameterAndUnitLabel.textAlignment = .center
-        parameterAndUnitLabel.textColor = GlobalMetricsColors.unitsTextColor
+        parameterAndUnitLabel.textColor = GlobalMetrics.Colors.unitsTextColor
     }
 }

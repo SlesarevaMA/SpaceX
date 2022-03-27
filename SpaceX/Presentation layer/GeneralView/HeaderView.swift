@@ -32,7 +32,7 @@ final class HeaderView: UIView {
             setButton.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
-        configItems()
+        configureItems()
     }
     
     required init?(coder: NSCoder) {
@@ -43,12 +43,12 @@ final class HeaderView: UIView {
         headerLabel.text = name
     }
     
-    private func configItems() {
+    private func configureItems() {
         headerLabel.font = .systemFont(ofSize: 24, weight: .regular)
         headerLabel.textAlignment = .left
-        headerLabel.textColor = GlobalMetricsColors.basicTextColor
+        headerLabel.textColor = GlobalMetrics.Colors.basicTextColor
         
         setButton.imageView?.image = UIImage(named: "setImage")
-        setButton.backgroundColor = GlobalMetricsColors.basicColor
+        setButton.backgroundColor = GlobalMetrics.Colors.basicColor
     }
 }
