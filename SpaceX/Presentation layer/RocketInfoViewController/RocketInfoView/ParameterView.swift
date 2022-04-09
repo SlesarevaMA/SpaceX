@@ -7,10 +7,7 @@
 
 import UIKit
 
-// повторяющийся код
-
 struct ParameterViewModel {
-    let parameter: String
     let value: String
     let unit: String?
     let style: ParameterView.Style
@@ -23,7 +20,8 @@ final class ParameterView: UIView {
         case unit
     }
     
-    private let parameterLabel = UILabel()
+    let parameterLabel = UILabel()
+    
     private let valueLabel = UILabel()
     private let unitLabel = UILabel()
     
@@ -69,7 +67,6 @@ final class ParameterView: UIView {
     
     
     func configureModel(_ model: ParameterViewModel) {
-        parameterLabel.text = model.parameter
         valueLabel.text = model.value
         unitLabel.text = model.unit
         

@@ -27,11 +27,17 @@ final class HeaderView: UIView {
             headerLabel.trailingAnchor.constraint(
                 greaterThanOrEqualTo: setButton.leadingAnchor,
                 constant: GlobalMetrics.horizontalSpacing),
+//            headerLabel.trailingAnchor.constraint(equalTo: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: <#T##CGFloat#>)
+            
             
             setButton.firstBaselineAnchor.constraint(equalTo: headerLabel.firstBaselineAnchor),
-            setButton.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
-        
+            setButton.topAnchor.constraint(equalTo: topAnchor),
+            setButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            setButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            setButton.widthAnchor.constraint(equalToConstant: 26),
+            setButton.heightAnchor.constraint(equalToConstant: 28)
+                    ])
+    
         configureItems()
     }
     
@@ -44,11 +50,12 @@ final class HeaderView: UIView {
     }
     
     private func configureItems() {
+        headerLabel.text = "Falcon Heavy"
         headerLabel.font = .systemFont(ofSize: 24, weight: .regular)
         headerLabel.textAlignment = .left
         headerLabel.textColor = GlobalMetrics.Colors.basicTextColor
         
-        setButton.imageView?.image = UIImage(named: "setImage")
+        setButton.setImage(UIImage(named: "Image"), for: .normal)
         setButton.backgroundColor = GlobalMetrics.Colors.basicColor
     }
 }

@@ -8,7 +8,6 @@
 import UIKit
 
 struct StageViewModel {
-    let stageNumber: String
     let enginesCount: ParameterViewModel
     let fuelQuantity: ParameterViewModel
     let combustionTime: ParameterViewModel
@@ -16,7 +15,8 @@ struct StageViewModel {
 
 final class StageView: UIView {
     
-    private let stageNumberLabel = UILabel()
+    let stageNumberLabel = UILabel()
+    
     private let enginesCountView = ParameterView()
     private let fuelQuantityView = ParameterView()
     private let combustionTimeView = ParameterView()
@@ -39,39 +39,47 @@ final class StageView: UIView {
             stageNumberLabel.topAnchor.constraint(equalTo: topAnchor),
             stageNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             stageNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            stageNumberLabel.bottomAnchor.constraint(
+                equalTo: enginesCountView.topAnchor,
+                constant: -GlobalMetrics.verticalSpacing),
 
-            enginesCountView.topAnchor.constraint(
-                equalTo: stageNumberLabel.bottomAnchor,
-                constant: GlobalMetrics.verticalSpacing),
             enginesCountView.leadingAnchor.constraint(equalTo: stageNumberLabel.leadingAnchor),
             enginesCountView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            enginesCountView.bottomAnchor.constraint(
+                equalTo: fuelQuantityView.topAnchor,
+                constant: -GlobalMetrics.verticalSpacing),
 
-            fuelQuantityView.topAnchor.constraint(
-                equalTo: enginesCountView.bottomAnchor,
-                constant: GlobalMetrics.verticalSpacing),
             fuelQuantityView.leadingAnchor.constraint(equalTo: stageNumberLabel.leadingAnchor),
             fuelQuantityView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            fuelQuantityView.bottomAnchor.constraint(
+                equalTo: combustionTimeView.topAnchor,
+                constant: -GlobalMetrics.verticalSpacing),
 
-            combustionTimeView.topAnchor.constraint(
-                equalTo: fuelQuantityView.bottomAnchor,
-                constant: GlobalMetrics.verticalSpacing),
             combustionTimeView.leadingAnchor.constraint(equalTo: stageNumberLabel.leadingAnchor),
             combustionTimeView.bottomAnchor.constraint(equalTo: bottomAnchor),
             combustionTimeView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         
-        stageNumberLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        stageNumberLabel.textAlignment = .left
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureStageView(with model: StageViewModel) {
-        stageNumberLabel.text = model.stageNumber
+    func configureModel(_ model: StageViewModel) {
         enginesCountView.configureModel(model.enginesCount)
         fuelQuantityView.configureModel(model.fuelQuantity)
         combustionTimeView.configureModel(model.combustionTime)
+    }
+    
+    private func configure() {
+        stageNumberLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        stageNumberLabel.textAlignment = .left
+        stageNumberLabel.textColor = GlobalMetrics.Colors.basicTextColor
+        
+        enginesCountView.parameterLabel.text = "Количество двигателей"
+        fuelQuantityView.parameterLabel.text = "Количество топлива"
+        combustionTimeView.parameterLabel.text = "Время сгорания"
     }
 }

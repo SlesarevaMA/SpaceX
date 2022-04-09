@@ -14,7 +14,7 @@ private enum Metrics {
 
 final class RocketInfoView: UIView {
     
-    private let generalView = GeneralInfoView()
+    let generalView = GeneralInfoView()
     private let firstStageView = StageView()
     private let secondStageView = StageView()
     private let launchesButton = UIButton()
@@ -38,33 +38,33 @@ final class RocketInfoView: UIView {
                 constant: Metrics.rocketInfoViewControllerHorizontalSpacing),
             generalView.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: Metrics.rocketInfoViewControllerHorizontalSpacing),
+                constant: -Metrics.rocketInfoViewControllerHorizontalSpacing),
             generalView.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: Metrics.rocketInfoViewControllerVerticalSpacing),
             generalView.bottomAnchor.constraint(
                 equalTo: firstStageView.topAnchor,
-                constant: GlobalMetrics.longVerticalSpacing),
+                constant: -GlobalMetrics.longVerticalSpacing),
             
             firstStageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Metrics.rocketInfoViewControllerHorizontalSpacing),
             firstStageView.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: Metrics.rocketInfoViewControllerHorizontalSpacing),
+                constant: -Metrics.rocketInfoViewControllerHorizontalSpacing),
             firstStageView.bottomAnchor.constraint(
                 equalTo: secondStageView.topAnchor,
-                constant: GlobalMetrics.longVerticalSpacing),
+                constant: -GlobalMetrics.longVerticalSpacing),
             
             secondStageView.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: Metrics.rocketInfoViewControllerHorizontalSpacing),
             secondStageView.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: Metrics.rocketInfoViewControllerHorizontalSpacing),
+                constant: -Metrics.rocketInfoViewControllerHorizontalSpacing),
             secondStageView.bottomAnchor.constraint(
                 equalTo: launchesButton.topAnchor,
-                constant: GlobalMetrics.longVerticalSpacing),
+                constant: -GlobalMetrics.longVerticalSpacing),
             
             launchesButton.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
@@ -73,21 +73,25 @@ final class RocketInfoView: UIView {
                 equalTo: trailingAnchor,
                 constant: Metrics.rocketInfoViewControllerHorizontalSpacing),
             launchesButton.bottomAnchor.constraint(
-                equalTo: launchesButton.topAnchor,
-                constant: GlobalMetrics.verticalSpacing)
+                equalTo: bottomAnchor,
+                constant: -GlobalMetrics.verticalSpacing)
         ])
         
-        configurelaunchesButton()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configurelaunchesButton() {
+    
+    private func configure() {
         launchesButton.setTitle("Посмотреть запуски", for: .normal)
         launchesButton.backgroundColor = GlobalMetrics.Colors.buttonBackgroundColor
         launchesButton.setTitleColor(GlobalMetrics.Colors.basicTextColor, for: .normal)
         launchesButton.layer.cornerRadius = 10
+        
+        firstStageView.stageNumberLabel.text = "ПЕРВАЯ СТУПЕНЬ"
+        secondStageView.stageNumberLabel.text = "ВТОРАЯ СТУПЕНЬ"
     }
 }

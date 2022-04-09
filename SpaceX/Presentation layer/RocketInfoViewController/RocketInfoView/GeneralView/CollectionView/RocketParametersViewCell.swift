@@ -53,7 +53,7 @@ final class RocketParametersViewCell: UICollectionViewCell {
                 constant: Metrics.collectionViewCellBottomVerticalSpacing)
         ])
         
-        configureLabels()
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -65,7 +65,7 @@ final class RocketParametersViewCell: UICollectionViewCell {
         parameterAndUnitLabel.text = "\(model.parameter), \(model.unit)"
     }
     
-    private func configureLabels() {
+    private func configure() {
         valueLabel.font = .systemFont(ofSize: 16, weight: .bold)
         valueLabel.textAlignment = .center
         valueLabel.textColor = GlobalMetrics.Colors.lightTextColor
