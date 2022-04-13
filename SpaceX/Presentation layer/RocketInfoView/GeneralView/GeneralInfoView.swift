@@ -20,28 +20,8 @@ private enum Metrics {
 
 final class GeneralInfoView: UIView {
     
-    weak var collectionViewDelegate: UICollectionViewDelegate? {
-        get {
-            return rocketParametersCollectionView.delegate
-        }
-        
-        set {
-            rocketParametersCollectionView.delegate = newValue
-        }
-    }
+    let collectionView = UICollectionView()
     
-    weak var dataSource: UICollectionViewDataSource? {
-        get {
-            return rocketParametersCollectionView.dataSource
-        }
-        
-        set {
-            rocketParametersCollectionView.dataSource = newValue
-        }
-    }
-    
-    let rocketParametersCollectionView = UICollectionView()
-
     private let headerView = HeaderView()
     private let firstStartView = ParameterView()
     private let countryView = ParameterView()
@@ -51,13 +31,13 @@ final class GeneralInfoView: UIView {
         super.init(frame: frame)
         
         addSubview(headerView)
-        addSubview(rocketParametersCollectionView)
+        addSubview(collectionView)
         addSubview(firstStartView)
         addSubview(countryView)
         addSubview(launchCostView)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        rocketParametersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         firstStartView.translatesAutoresizingMaskIntoConstraints = false
         countryView.translatesAutoresizingMaskIntoConstraints = false
         launchCostView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,17 +47,17 @@ final class GeneralInfoView: UIView {
             headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             headerView.topAnchor.constraint(equalTo: topAnchor),
             headerView.bottomAnchor.constraint(
-                equalTo: rocketParametersCollectionView.topAnchor,
+                equalTo: collectionView.topAnchor,
                 constant: -Metrics.generalViewVerticalSpacing
             ),
             
-            rocketParametersCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            rocketParametersCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            rocketParametersCollectionView.bottomAnchor.constraint(
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.bottomAnchor.constraint(
                 equalTo: firstStartView.topAnchor,
                 constant: -GlobalMetrics.longVerticalSpacing
             ),
-            rocketParametersCollectionView.heightAnchor.constraint(equalToConstant: 96),
+            collectionView.heightAnchor.constraint(equalToConstant: 96),
             
             firstStartView.leadingAnchor.constraint(equalTo: leadingAnchor),
             firstStartView.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -98,22 +78,13 @@ final class GeneralInfoView: UIView {
             launchCostView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
-        configure()
+        firstStartView.parameterLabel.text = "Первый запуск"
+        countryView.parameterLabel.text = "Страна"
+        launchCostView.parameterLabel.text = "Стоимость запуска"
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func configure() {
-//        rocketParametersCollectionView.register(
-//            RocketParametersViewCell.self,
-//            forCellWithReuseIdentifier: "RocketParametersViewCell"
-//        )
-        
-        firstStartView.parameterLabel.text = "Первый запуск"
-        countryView.parameterLabel.text = "Страна"
-        launchCostView.parameterLabel.text = "Стоимость запуска"
     }
     
 }

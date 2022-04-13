@@ -19,7 +19,6 @@ final class RocketInfoViewController: UIViewController {
     private let secondStageView = StageView()
     private let launchesButton = UIButton()
     
-    
     private let parameters = [RocketParametersViewCellModel]()
 
     private let scrollView = UIScrollView()
@@ -37,6 +36,9 @@ final class RocketInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        generalView.collectionView.dataSource = self
+        generalView.collectionView.register(RocketParametersViewCell.self, forCellWithReuseIdentifier: "RocketParametersViewCell")
         
         view.addSubview(scrollView)
         
@@ -132,8 +134,8 @@ extension RocketInfoViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RocketParametersCollectionViewCell", for: indexPath) as? RocketParametersViewCell  else {
-            fatalError("Unable to dequeue RocketParametersCollectionViewCell")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RocketParametersViewCell", for: indexPath) as? RocketParametersViewCell  else {
+            fatalError("Unable to dequeue RocketParametersViewCell")
         }
         
         let parameter = parameters[indexPath.item]

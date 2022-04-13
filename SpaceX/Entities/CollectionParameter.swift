@@ -6,8 +6,8 @@
 //
 
 struct CollectionParameter {
-    let height: Double
-    let diameter: Double
-    let mass: Double
-    let payload: Double
+    let height: [String:Double]
+    let diameter: [String:Double]
+    let mass: [String:Double]
+    let payload: [String:Double]
 }

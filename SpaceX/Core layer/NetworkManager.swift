@@ -13,7 +13,7 @@ final class NetworkManager {
             if (response as? HTTPURLResponse)?.statusCode == 200, let data = data {
                  completion(.success(data))
              } else {
-                 completion(.failure(RequestError.downloadFail))
+                 completion(.failure(RequestError.downloadFail(error)))
             }
         }
         

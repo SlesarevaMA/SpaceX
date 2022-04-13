@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+final class LaunchesParser {
+    func parseData(data: Data) -> [Launch]? {
+        
+        
+        return nil
+    }
+}

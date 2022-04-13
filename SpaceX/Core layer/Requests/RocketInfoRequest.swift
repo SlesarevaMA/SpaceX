@@ -7,26 +7,13 @@
 
 import Foundation
 
-final class RocketInfoRequest {
+struct RocketInfoRequest: Request {
     
-    private let spaceRocketsUrlString = "https://api.spacexdata.com/v4/rockets"
-    private let launchesUrlString = "https://api.spacexdata.com/v4/launches"
-    
-    func sendRequest() {
-        
-        guard let spaceRocketsUrl = URL(string: spaceRocketsUrlString) else {
-            print("Invalid Space Rockets Url")
-            return
-        }
-                
-        let dataTask = URLSession.shared.dataTask(with: spaceRocketsUrl) { data, response, error in
-            if (response as? HTTPURLResponse)?.statusCode == 200, let data = data {
-                print(data)
-            } else {
-                print(RequestError.downloadFail(error))
-            }
+    var urlRequest: URLRequest {
+        guard let url = URL(string: RequestConstants.rocketInfoUrl) else {
+            fatalError("Unable to create url")
         }
         
-        dataTask.resume()
+        return URLRequest(url: url)
     }
 }

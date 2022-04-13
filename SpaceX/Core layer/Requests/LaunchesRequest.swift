@@ -1,5 +1,5 @@
 //
-//  Launches.swift
+//  LaunchesRequest.swift
 //  SpaceX
 //
 //  Created by Margarita Slesareva on 12.04.2022.
@@ -7,4 +7,14 @@
 
 import Foundation
 
-l
+struct LaunchesRequest: Request {
+    
+    var urlRequest: URLRequest {
+        guard let url = URL(string: RequestConstants.launchesUrl) else {
+            fatalError("Unable to create url")
+        }
+        
+        return URLRequest(url: url)
+    }
+}
+
