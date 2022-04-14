@@ -23,8 +23,7 @@
 		5C6CC0B227ECA94500F8B9B6 /* RocketParametersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6CC0B127ECA94500F8B9B6 /* RocketParametersViewCell.swift */; };
 		5C708A7227F0C87700F8B582 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C708A7127F0C87700F8B582 /* RequestError.swift */; };
 		5C708A7427F0C8E800F8B582 /* RocketInfoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C708A7327F0C8E800F8B582 /* RocketInfoParser.swift */; };
-		5C7939D727EFC9A700C00C08 /* RocketParametersViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7939D627EFC9A700C00C08 /* RocketParametersViewCellModel.swift */; };
-		5C7939DB27EFCEE800C00C08 /* CollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7939DA27EFCEE800C00C08 /* CollectionViewDelegate.swift */; };
+		5C7939DB27EFCEE800C00C08 /* RocketParametersViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7939DA27EFCEE800C00C08 /* RocketParametersViewCellModel.swift */; };
 		5C7939DD27EFE76D00C00C08 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7939DC27EFE76D00C00C08 /* Constants.swift */; };
 		5C7AD2E227E931500095B780 /* StageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7AD2E127E931500095B780 /* StageView.swift */; };
 		5C7AD2E627E933F50095B780 /* GlobalMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7AD2E527E933F50095B780 /* GlobalMetrics.swift */; };
@@ -56,8 +55,7 @@
 		5C6CC0B127ECA94500F8B9B6 /* RocketParametersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketParametersViewCell.swift; sourceTree = "<group>"; };
 		5C708A7127F0C87700F8B582 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		5C708A7327F0C8E800F8B582 /* RocketInfoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoParser.swift; sourceTree = "<group>"; };
-		5C7939D627EFC9A700C00C08 /* RocketParametersViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketParametersViewCellModel.swift; sourceTree = "<group>"; };
-		5C7939DA27EFCEE800C00C08 /* CollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegate.swift; sourceTree = "<group>"; };
+		5C7939DA27EFCEE800C00C08 /* RocketParametersViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketParametersViewCellModel.swift; sourceTree = "<group>"; };
 		5C7939DC27EFE76D00C00C08 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5C7AD2E127E931500095B780 /* StageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageView.swift; sourceTree = "<group>"; };
 		5C7AD2E527E933F50095B780 /* GlobalMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMetrics.swift; sourceTree = "<group>"; };
@@ -198,9 +196,9 @@
 		5CE7BE6627EE5271001885D1 /* GeneralView */ = {
 			isa = PBXGroup;
 			children = (
+				5C6CC0AB27EB5FFA00F8B9B6 /* HeaderView.swift */,
 				5CE7BE6727EE52BD001885D1 /* CollectionView */,
 				5C01B8882806235B008F670D /* GeneralInfoView.swift */,
-				5C6CC0AB27EB5FFA00F8B9B6 /* HeaderView.swift */,
 			);
 			path = GeneralView;
 			sourceTree = "<group>";
@@ -209,8 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				5C6CC0B127ECA94500F8B9B6 /* RocketParametersViewCell.swift */,
-				5C7939D627EFC9A700C00C08 /* RocketParametersViewCellModel.swift */,
-				5C7939DA27EFCEE800C00C08 /* CollectionViewDelegate.swift */,
+				5C7939DA27EFCEE800C00C08 /* RocketParametersViewCellModel.swift */,
 			);
 			path = CollectionView;
 			sourceTree = "<group>";
@@ -314,11 +311,10 @@
 				5C6C209527FC7D7A00777FED /* Launch.swift in Sources */,
 				5C6C209327FC7C9D00777FED /* StageModel.swift in Sources */,
 				5C6C209127FC7C6900777FED /* CollectionParameter.swift in Sources */,
-				5C7939DB27EFCEE800C00C08 /* CollectionViewDelegate.swift in Sources */,
+				5C7939DB27EFCEE800C00C08 /* RocketParametersViewCellModel.swift in Sources */,
 				5C01B8892806235B008F670D /* GeneralInfoView.swift in Sources */,
 				5C7939DD27EFE76D00C00C08 /* Constants.swift in Sources */,
 				5CF3B39227E7884C00EBC28A /* ParameterView.swift in Sources */,
-				5C7939D727EFC9A700C00C08 /* RocketParametersViewCellModel.swift in Sources */,
 				5C01B87E28061470008F670D /* Request.swift in Sources */,
 				5C01B87C280613DC008F670D /* NetworkManager.swift in Sources */,
 				5C935A8C27FBB53F006AFBB4 /* RocketInfoModel.swift in Sources */,

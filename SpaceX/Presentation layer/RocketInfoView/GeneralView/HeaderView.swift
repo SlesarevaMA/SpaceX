@@ -21,22 +21,20 @@ final class HeaderView: UIView {
         setButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerLabel.topAnchor.constraint(equalTo: topAnchor),
+            headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            headerLabel.trailingAnchor.constraint(
-                greaterThanOrEqualTo: setButton.leadingAnchor,
-                constant: GlobalMetrics.horizontalSpacing),
-//            headerLabel.trailingAnchor.constraint(equalTo: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: <#T##CGFloat#>)
             
-            
-            setButton.firstBaselineAnchor.constraint(equalTo: headerLabel.firstBaselineAnchor),
             setButton.topAnchor.constraint(equalTo: topAnchor),
-            setButton.bottomAnchor.constraint(equalTo: bottomAnchor),
+            setButton.leadingAnchor.constraint(
+                greaterThanOrEqualTo: headerLabel.trailingAnchor,
+                constant: GlobalMetrics.horizontalSpacing
+            ),
+
             setButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             setButton.widthAnchor.constraint(equalToConstant: 26),
             setButton.heightAnchor.constraint(equalToConstant: 28)
-                    ])
+        ])
     
         configureItems()
     }
@@ -55,7 +53,8 @@ final class HeaderView: UIView {
         headerLabel.textAlignment = .left
         headerLabel.textColor = GlobalMetrics.Colors.basicTextColor
         
-        setButton.setImage(UIImage(named: "Image"), for: .normal)
-        setButton.backgroundColor = GlobalMetrics.Colors.basicColor
+        
+        setButton.setImage(UIImage(named: "settings"), for: .normal)
+        setButton.tintColor = GlobalMetrics.Colors.basicColor
     }
 }

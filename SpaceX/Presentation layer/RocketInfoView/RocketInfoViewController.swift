@@ -22,10 +22,12 @@ final class RocketInfoViewController: UIViewController {
     private let parameters = [RocketParametersViewCellModel]()
 
     private let scrollView = UIScrollView()
-    private let rocketInfoRequestService: RocketInfoRequestService
+    private let rocketInfoService: RocketInfoService
     
-    init(rocketInfoRequestService: RocketInfoRequestService) {
-        self.rocketInfoRequestService = rocketInfoRequestService
+    init() {
+        let networkManager = NetworkManagerImpl()
+        let rocketInfoParser = RocketInfoParser()
+        rocketInfoService = RocketInfoServiceImpl(networkManager: networkManager, rocketInfoParser: rocketInfoParser)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -36,10 +38,14 @@ final class RocketInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         generalView.collectionView.dataSource = self
         generalView.collectionView.register(RocketParametersViewCell.self, forCellWithReuseIdentifier: "RocketParametersViewCell")
-        
+
+        addSubViews()
+    }
+    
+    private func addSubViews() {
+                
         view.addSubview(scrollView)
         
         scrollView.addSubview(generalView)
@@ -126,11 +132,15 @@ final class RocketInfoViewController: UIViewController {
         firstStageView.stageNumberLabel.text = "ПЕРВАЯ СТУПЕНЬ"
         secondStageView.stageNumberLabel.text = "ВТОРАЯ СТУПЕНЬ"
     }
+    
+    private func requestRockets() {
+        
+    }
 }
 
 extension RocketInfoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return parameters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

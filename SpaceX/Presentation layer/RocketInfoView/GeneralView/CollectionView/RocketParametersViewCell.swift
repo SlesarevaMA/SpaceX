@@ -31,23 +31,23 @@ final class RocketParametersViewCell: UICollectionViewCell {
         parameterAndUnitLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            valueLabel.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
-                constant: GlobalMetrics.shortHorizontalSpacing),
-            valueLabel.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
-                constant: GlobalMetrics.shortHorizontalSpacing),
             valueLabel.topAnchor.constraint(
                 equalTo: topAnchor,
                 constant: Metrics.collectionViewCellTopVerticalSpacing),
-            valueLabel.bottomAnchor.constraint(equalTo: parameterAndUnitLabel.topAnchor),
+            valueLabel.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: GlobalMetrics.shortHorizontalSpacing),
+//            valueLabel.trailingAnchor.constraint(
+//                equalTo: trailingAnchor,
+//                constant: GlobalMetrics.shortHorizontalSpacing),
             
+            parameterAndUnitLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor),
             parameterAndUnitLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: GlobalMetrics.shortHorizontalSpacing),
-            parameterAndUnitLabel.trailingAnchor.constraint(
-                equalTo: trailingAnchor,
-                constant: GlobalMetrics.shortHorizontalSpacing),
+//            parameterAndUnitLabel.trailingAnchor.constraint(
+//                equalTo: trailingAnchor,
+//                constant: GlobalMetrics.shortHorizontalSpacing),
             parameterAndUnitLabel.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
                 constant: Metrics.collectionViewCellBottomVerticalSpacing)

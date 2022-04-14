@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class RocketInfoRequestService {
+protocol RocketInfoService {
+    func requestRocketInfo(completion: @escaping (Result<[Rocket], RequestError>) -> Void)
+}
+
+final class RocketInfoServiceImpl: RocketInfoService {
     
     private let networkManager: NetworkManager
     private let rocketInfoParser: RocketInfoParser
@@ -18,7 +22,6 @@ final class RocketInfoRequestService {
     }
     
     func requestRocketInfo(completion: @escaping (Result<[Rocket], RequestError>) -> Void) {
-        
         let dataRequest = RocketInfoRequest()
         
         networkManager.sendRequest(request: dataRequest) { result in
