@@ -10,7 +10,7 @@ import Foundation
 struct RocketInfoRequest: Request {
     
     var urlRequest: URLRequest {
-        guard let url = URL(string: RequestConstants.rocketInfoUrl) else {
+        guard let url = URL(string: RequestConstants.apiUrl + "rockets") else {
             fatalError("Unable to create url")
         }
         

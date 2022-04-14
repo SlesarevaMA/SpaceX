@@ -10,7 +10,7 @@ import Foundation
 struct LaunchesRequest: Request {
     
     var urlRequest: URLRequest {
-        guard let url = URL(string: RequestConstants.launchesUrl) else {
+        guard let url = URL(string: RequestConstants.apiUrl + "launches") else {
             fatalError("Unable to create url")
         }
         

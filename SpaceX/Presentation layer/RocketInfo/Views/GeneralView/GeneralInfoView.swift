@@ -7,13 +7,6 @@
 
 import UIKit
 
-struct GeneralInfoViewModel {
-    let rocketName: String
-    let firstStart: String
-    let countryGeneralInfoView: String
-    let launchCostGeneralInfoView: String
-}
-
 private enum Metrics {
     static let generalViewVerticalSpacing: CGFloat = 32
 }
@@ -87,4 +80,13 @@ final class GeneralInfoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(with model: GeneralInfoViewModel) {
+        headerView.addRocketName(model.rocketName)
+        firstStartView.configureModel(model.firstStart)
+        countryView.configureModel(model.country)
+        
+        if let launchCost = model.launchCost {
+            launchCostView.configureModel(launchCost)
+        }
+    }
 }

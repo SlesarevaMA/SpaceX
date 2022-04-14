@@ -6,6 +6,6 @@
 //
 
 enum RequestError: Error {
-    case downloadFail(Error?)
-    case parseFail(Error?)
+    case downloadFail
+    case parseFail
 }

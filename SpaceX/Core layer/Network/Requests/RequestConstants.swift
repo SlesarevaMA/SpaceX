@@ -8,6 +8,5 @@
 import Foundation
 
 enum RequestConstants {
-    static let rocketInfoUrl = "https://api.spacexdata.com/v4/rockets"
-    static let launchesUrl = "https://api.spacexdata.com/v4/launches"
+    static let apiUrl = "https://api.spacexdata.com/v4/"
 }

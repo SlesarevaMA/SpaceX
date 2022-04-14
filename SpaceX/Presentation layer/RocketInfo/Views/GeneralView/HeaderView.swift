@@ -53,7 +53,6 @@ final class HeaderView: UIView {
         headerLabel.textAlignment = .left
         headerLabel.textColor = GlobalMetrics.Colors.basicTextColor
         
-        
         setButton.setImage(UIImage(named: "settings"), for: .normal)
         setButton.tintColor = GlobalMetrics.Colors.basicColor
     }

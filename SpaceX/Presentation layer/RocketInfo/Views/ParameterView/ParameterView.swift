@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct ParameterViewModel {
-    let value: String
-    let unit: String?
-    let style: ParameterView.Style
-}
-
 final class ParameterView: UIView {
     
     enum Style {
@@ -36,6 +30,8 @@ final class ParameterView: UIView {
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         unitLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        unitLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
+        
         NSLayoutConstraint.activate([
             parameterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             parameterLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -55,7 +51,6 @@ final class ParameterView: UIView {
             unitLabel.topAnchor.constraint(equalTo: topAnchor),
             unitLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             unitLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
-
         ])
         
         configure()
@@ -64,7 +59,6 @@ final class ParameterView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     func configureModel(_ model: ParameterViewModel) {
         valueLabel.text = model.value

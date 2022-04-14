@@ -14,20 +14,25 @@ private enum Metrics {
 
 final class RocketInfoViewController: UIViewController {
     
+    private let rocketInfoService: RocketInfoService
+    private let viewModelMapper: RocketInfoViewModelMapper
+    
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
+    
     private let generalView = GeneralInfoView()
     private let firstStageView = StageView()
     private let secondStageView = StageView()
     private let launchesButton = UIButton()
     
     private let parameters = [RocketParametersViewCellModel]()
-
-    private let scrollView = UIScrollView()
-    private let rocketInfoService: RocketInfoService
+    private var rockets = [RocketViewModel]()
     
     init() {
         let networkManager = NetworkManagerImpl()
-        let rocketInfoParser = RocketInfoParser()
-        rocketInfoService = RocketInfoServiceImpl(networkManager: networkManager, rocketInfoParser: rocketInfoParser)
+        let decoder = SpaceXJSONDecoder()
+        rocketInfoService = RocketInfoServiceImpl(networkManager: networkManager, decoder: decoder)
+        viewModelMapper = RocketInfoViewModelMapper()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,21 +43,24 @@ final class RocketInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         generalView.collectionView.dataSource = self
         generalView.collectionView.register(RocketParametersViewCell.self, forCellWithReuseIdentifier: "RocketParametersViewCell")
 
         addSubViews()
+        requestRockets()
     }
     
     private func addSubViews() {
-                
         view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        scrollView.addSubview(generalView)
-        scrollView.addSubview(firstStageView)
-        scrollView.addSubview(secondStageView)
-        scrollView.addSubview(launchesButton)
+        contentView.addSubview(generalView)
+        contentView.addSubview(firstStageView)
+        contentView.addSubview(secondStageView)
+        contentView.addSubview(launchesButton)
         
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         generalView.translatesAutoresizingMaskIntoConstraints = false
         firstStageView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,43 +68,26 @@ final class RocketInfoViewController: UIViewController {
         launchesButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            generalView.leadingAnchor.constraint(
-                equalTo: scrollView.leadingAnchor,
-                constant: Metrics.horizontalSpacing
-            ),
-            generalView.trailingAnchor.constraint(
-                equalTo: scrollView.trailingAnchor,
-                constant: -Metrics.horizontalSpacing
-            ),
-            generalView.topAnchor.constraint(
-                equalTo: scrollView.topAnchor,
-                constant: Metrics.verticalSpacing
-            ),
+            generalView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            generalView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            generalView.topAnchor.constraint(equalTo: contentView.topAnchor),
             generalView.bottomAnchor.constraint(
                 equalTo: firstStageView.topAnchor,
                 constant: -GlobalMetrics.longVerticalSpacing
             ),
             
-            firstStageView.leadingAnchor.constraint(
-                equalTo: scrollView.leadingAnchor,
-                constant: Metrics.horizontalSpacing
-            ),
-            firstStageView.trailingAnchor.constraint(
-                equalTo: scrollView.trailingAnchor,
-                constant: -Metrics.horizontalSpacing
-            ),
+            firstStageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            firstStageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             firstStageView.bottomAnchor.constraint(
                 equalTo: secondStageView.topAnchor,
                 constant: -GlobalMetrics.longVerticalSpacing
             ),
             
             secondStageView.leadingAnchor.constraint(
-                equalTo: scrollView.leadingAnchor,
-                constant: Metrics.horizontalSpacing
+                equalTo: contentView.leadingAnchor
             ),
             secondStageView.trailingAnchor.constraint(
-                equalTo: scrollView.trailingAnchor,
-                constant: -Metrics.horizontalSpacing
+                equalTo: contentView.trailingAnchor
             ),
             secondStageView.bottomAnchor.constraint(
                 equalTo: launchesButton.topAnchor,
@@ -104,16 +95,13 @@ final class RocketInfoViewController: UIViewController {
             ),
             
             launchesButton.leadingAnchor.constraint(
-                equalTo: scrollView.leadingAnchor,
-                constant: Metrics.horizontalSpacing
+                equalTo: contentView.leadingAnchor
             ),
             launchesButton.trailingAnchor.constraint(
-                equalTo: scrollView.trailingAnchor,
-                constant: Metrics.horizontalSpacing
+                equalTo: contentView.trailingAnchor
             ),
             launchesButton.bottomAnchor.constraint(
-                equalTo: scrollView.bottomAnchor,
-                constant: -GlobalMetrics.verticalSpacing
+                equalTo: contentView.bottomAnchor
             )
         ])
 
@@ -121,7 +109,13 @@ final class RocketInfoViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
         ])
         
         launchesButton.setTitle("Посмотреть запуски", for: .normal)
@@ -133,8 +127,47 @@ final class RocketInfoViewController: UIViewController {
         secondStageView.stageNumberLabel.text = "ВТОРАЯ СТУПЕНЬ"
     }
     
+    private func configure(with model: RocketViewModel) {
+        generalView.configure(with: model.rocketInfoModel)
+        firstStageView.configureModel(model.firstStageModel)
+        secondStageView.configureModel(model.secondStageModel)
+    }
+
     private func requestRockets() {
+        rocketInfoService.requestRocketInfo { result in
+            DispatchQueue.main.async {
+                self.processResult(result: result)
+            }
+        }
+    }
+    
+    private func processResult(result: Result<[RocketAPIModel], RequestError>) {
+        switch result {
+        case .success(let results):
+            rockets = results.map(viewModelMapper.map(model:))
+            
+            if let firstRocket = rockets.first {
+                configure(with: firstRocket)
+            }
+        case .failure(let error):
+            handleError(error)
+        }
+    }
+    
+    private func handleError(_ error: RequestError) {
+        showAlert(title: "Download fail", message: nil) {
+            self.requestRockets()
+        }
+    }
+    
+    private func showAlert(title: String, message: String?, completion: @escaping () -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Try again", style: .default) { _ in
+            completion()
+        }
         
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 }
 
