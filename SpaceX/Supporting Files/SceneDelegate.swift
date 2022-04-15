@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let window = UIWindow(windowScene: scene)
-        window.rootViewController = RocketInfoViewController()
+        window.rootViewController = RocketContainerViewController()
         window.makeKeyAndVisible()
         
         self.window = window

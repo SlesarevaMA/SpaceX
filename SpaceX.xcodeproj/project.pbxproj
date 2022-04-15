@@ -34,10 +34,13 @@
 		5C9D7A9D2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A9C2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift */; };
 		5C9D7AA02808BD3300B7F3D2 /* ParameterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A9F2808BD3300B7F3D2 /* ParameterViewModel.swift */; };
 		5CCDD8E828046C360068DCA0 /* RocketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCDD8E728046C360068DCA0 /* RocketViewModel.swift */; };
+		5CE5043D2809F3BA00FB5071 /* RocketContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE5043C2809F3BA00FB5071 /* RocketContainerViewController.swift */; };
+		5CE504402809F56A00FB5071 /* FittedSheets in Frameworks */ = {isa = PBXBuildFile; productRef = 5CE5043F2809F56A00FB5071 /* FittedSheets */; };
 		5CE6F9A427E54677004499EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE6F9A327E54677004499EA /* AppDelegate.swift */; };
 		5CE6F9A627E54677004499EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE6F9A527E54677004499EA /* SceneDelegate.swift */; };
 		5CE6F9AD27E5467B004499EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CE6F9AC27E5467B004499EA /* Assets.xcassets */; };
 		5CE6F9B027E5467B004499EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE6F9AE27E5467B004499EA /* LaunchScreen.storyboard */; };
+		5CEDD9AE280A021700C2FB9D /* SimpleURLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEDD9AD280A021700C2FB9D /* SimpleURLRequest.swift */; };
 		5CF3B39227E7884C00EBC28A /* ParameterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF3B39127E7884C00EBC28A /* ParameterView.swift */; };
 		5CF924E52808A28100356BFB /* GeneralInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF924E42808A28100356BFB /* GeneralInfoViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -70,12 +73,14 @@
 		5C9D7A9C2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoViewModelMapper.swift; sourceTree = "<group>"; };
 		5C9D7A9F2808BD3300B7F3D2 /* ParameterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterViewModel.swift; sourceTree = "<group>"; };
 		5CCDD8E728046C360068DCA0 /* RocketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketViewModel.swift; sourceTree = "<group>"; };
+		5CE5043C2809F3BA00FB5071 /* RocketContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketContainerViewController.swift; sourceTree = "<group>"; };
 		5CE6F9A027E54677004499EA /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE6F9A327E54677004499EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CE6F9A527E54677004499EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5CE6F9AC27E5467B004499EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CE6F9AF27E5467B004499EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CE6F9B127E5467B004499EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CEDD9AD280A021700C2FB9D /* SimpleURLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleURLRequest.swift; sourceTree = "<group>"; };
 		5CF3B39127E7884C00EBC28A /* ParameterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterView.swift; sourceTree = "<group>"; };
 		5CF924E42808A28100356BFB /* GeneralInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralInfoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE504402809F56A00FB5071 /* FittedSheets in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +113,7 @@
 				5C7F305327EE2B0B00B195F9 /* RocketInfoRequest.swift */,
 				5C01B88228061959008F670D /* LaunchesRequest.swift */,
 				5C01B88028061525008F670D /* RequestConstants.swift */,
+				5CEDD9AD280A021700C2FB9D /* SimpleURLRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -140,6 +147,7 @@
 		5C7F305227EE269000B195F9 /* Presentation layer */ = {
 			isa = PBXGroup;
 			children = (
+				5CE5043B2809F3A300FB5071 /* RocketContainer */,
 				5C7AD2E527E933F50095B780 /* GlobalMetrics.swift */,
 				5C935A8927FBB492006AFBB4 /* RocketInfo */,
 				5C7939DC27EFE76D00C00C08 /* Constants.swift */,
@@ -196,6 +204,14 @@
 				5C708A6F27F09E4600F8B582 /* ParameterView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5CE5043B2809F3A300FB5071 /* RocketContainer */ = {
+			isa = PBXGroup;
+			children = (
+				5CE5043C2809F3BA00FB5071 /* RocketContainerViewController.swift */,
+			);
+			path = RocketContainer;
 			sourceTree = "<group>";
 		};
 		5CE6F99727E54677004499EA = {
@@ -292,6 +308,9 @@
 			dependencies = (
 			);
 			name = SpaceX;
+			packageProductDependencies = (
+				5CE5043F2809F56A00FB5071 /* FittedSheets */,
+			);
 			productName = SpaceX;
 			productReference = 5CE6F9A027E54677004499EA /* SpaceX.app */;
 			productType = "com.apple.product-type.application";
@@ -320,6 +339,9 @@
 				Base,
 			);
 			mainGroup = 5CE6F99727E54677004499EA;
+			packageReferences = (
+				5CE5043E2809F56A00FB5071 /* XCRemoteSwiftPackageReference "FittedSheets" */,
+			);
 			productRefGroup = 5CE6F9A127E54677004499EA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -352,8 +374,10 @@
 				5C6CC0AC27EB5FFA00F8B9B6 /* HeaderView.swift in Sources */,
 				5CE6F9A427E54677004499EA /* AppDelegate.swift in Sources */,
 				5C9D7A952808B7F500B7F3D2 /* Length.swift in Sources */,
+				5CEDD9AE280A021700C2FB9D /* SimpleURLRequest.swift in Sources */,
 				5C7AD2E627E933F50095B780 /* GlobalMetrics.swift in Sources */,
 				5C6C209327FC7C9D00777FED /* StageViewModel.swift in Sources */,
+				5CE5043D2809F3BA00FB5071 /* RocketContainerViewController.swift in Sources */,
 				5C6C209127FC7C6900777FED /* RocketCollectionCellViewModel.swift in Sources */,
 				5C7939DB27EFCEE800C00C08 /* RocketParametersViewCellModel.swift in Sources */,
 				5C9D7A932808B7D900B7F3D2 /* Stage.swift in Sources */,
@@ -588,6 +612,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5CE5043E2809F56A00FB5071 /* XCRemoteSwiftPackageReference "FittedSheets" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:gordontucker/FittedSheets.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5CE5043F2809F56A00FB5071 /* FittedSheets */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CE5043E2809F56A00FB5071 /* XCRemoteSwiftPackageReference "FittedSheets" */;
+			productName = FittedSheets;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5CE6F99827E54677004499EA /* Project object */;
 }

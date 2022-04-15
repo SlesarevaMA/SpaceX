@@ -14,10 +14,8 @@ private enum Metrics {
 
 final class RocketInfoViewController: UIViewController {
     
-    private let rocketInfoService: RocketInfoService
-    private let viewModelMapper: RocketInfoViewModelMapper
+    let scrollView = UIScrollView()
     
-    private let scrollView = UIScrollView()
     private let contentView = UIView()
     
     private let generalView = GeneralInfoView()
@@ -26,20 +24,6 @@ final class RocketInfoViewController: UIViewController {
     private let launchesButton = UIButton()
     
     private let parameters = [RocketParametersViewCellModel]()
-    private var rockets = [RocketViewModel]()
-    
-    init() {
-        let networkManager = NetworkManagerImpl()
-        let decoder = SpaceXJSONDecoder()
-        rocketInfoService = RocketInfoServiceImpl(networkManager: networkManager, decoder: decoder)
-        viewModelMapper = RocketInfoViewModelMapper()
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +32,6 @@ final class RocketInfoViewController: UIViewController {
         generalView.collectionView.register(RocketParametersViewCell.self, forCellWithReuseIdentifier: "RocketParametersViewCell")
 
         addSubViews()
-        requestRockets()
     }
     
     private func addSubViews() {
@@ -141,47 +124,10 @@ final class RocketInfoViewController: UIViewController {
         secondStageView.stageNumberLabel.text = "ВТОРАЯ СТУПЕНЬ"
     }
     
-    private func configure(with model: RocketViewModel) {
+    func configure(with model: RocketViewModel) {
         generalView.configure(with: model.rocketInfoModel)
         firstStageView.configureModel(model.firstStageModel)
         secondStageView.configureModel(model.secondStageModel)
-    }
-
-    private func requestRockets() {
-        rocketInfoService.requestRocketInfo { result in
-            DispatchQueue.main.async {
-                self.processResult(result: result)
-            }
-        }
-    }
-    
-    private func processResult(result: Result<[RocketAPIModel], RequestError>) {
-        switch result {
-        case .success(let results):
-            rockets = results.map(viewModelMapper.map(model:))
-            
-            if let firstRocket = rockets.first {
-                configure(with: firstRocket)
-            }
-        case .failure(let error):
-            handleError(error)
-        }
-    }
-    
-    private func handleError(_ error: RequestError) {
-        showAlert(title: "Download fail", message: nil) {
-            self.requestRockets()
-        }
-    }
-    
-    private func showAlert(title: String, message: String?, completion: @escaping () -> Void) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Try again", style: .default) { _ in
-            completion()
-        }
-        
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
     }
 }
 

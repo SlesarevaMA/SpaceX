@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol RocketInfoService {
     func requestRocketInfo(completion: @escaping (Result<[RocketAPIModel], RequestError>) -> Void)
+    func requestImage(at url: URL, completion: @escaping (UIImage?) -> Void)
 }
 
 final class RocketInfoServiceImpl: RocketInfoService {
@@ -27,6 +29,13 @@ final class RocketInfoServiceImpl: RocketInfoService {
         networkManager.sendRequest(request: dataRequest) { result in
             switch result {
             case .success(let data):
+//                do {
+//                    let rockets = try self.decoder.decode([RocketAPIModel].self, from: data)
+//                    rockets.forEach { print($0) }
+//                } catch {
+//                    print(error)
+//                }
+                
                 if let rockets = try? self.decoder.decode([RocketAPIModel].self, from: data) {
                     completion(.success(rockets))
                 } else {
@@ -34,6 +43,19 @@ final class RocketInfoServiceImpl: RocketInfoService {
                 }
             case .failure:
                 completion(.failure(.downloadFail))
+            }
+        }
+    }
+    
+    func requestImage(at url: URL, completion: @escaping (UIImage?) -> Void) {
+        let request = SimpleURLRequest(url: url)
+        
+        networkManager.sendRequest(request: request) { result in
+            if case let .success(imageData) = result {
+                let image = UIImage(data: imageData)
+                completion(image)
+            } else {
+                completion(nil)
             }
         }
     }
