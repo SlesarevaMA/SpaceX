@@ -53,8 +53,8 @@ final class StageView: UIView {
                 constant: GlobalMetrics.verticalSpacing
             ),
             combustionTimeView.leadingAnchor.constraint(equalTo: stageNumberLabel.leadingAnchor),
-            combustionTimeView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            combustionTimeView.trailingAnchor.constraint(equalTo: trailingAnchor)
+            combustionTimeView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            combustionTimeView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         
         configure()

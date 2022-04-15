@@ -58,12 +58,12 @@ final class RocketInfoViewModelMapper {
         var burnTimeViewModel: ParameterViewModel?
         
         if let burnTime = model.burnTimeSec {
-            burnTimeViewModel = ParameterViewModel(value: String(burnTime))
+            burnTimeViewModel = ParameterViewModel(value: String(burnTime), unit: "sec", style: .unit)
         }
         
         return StageViewModel(
-            enginesCount: ParameterViewModel(value: String(model.engines)),
-            fuelQuantity: ParameterViewModel(value: String(model.fuelAmountTons)),
+            enginesCount: ParameterViewModel(value: String(model.engines), style: .unit),
+            fuelQuantity: ParameterViewModel(value: String(model.fuelAmountTons), unit: "ton", style: .unit),
             burnTime: burnTimeViewModel
         )
     }

@@ -33,22 +33,22 @@ final class ParameterView: UIView {
         unitLabel.setContentHuggingPriority(UILayoutPriority(251), for: .horizontal)
         
         NSLayoutConstraint.activate([
-            parameterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             parameterLabel.topAnchor.constraint(equalTo: topAnchor),
+            parameterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             parameterLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            parameterLabel.trailingAnchor.constraint(
-                greaterThanOrEqualTo: valueLabel.leadingAnchor,
-                constant: -GlobalMetrics.horizontalSpacing
-            ),
-            
+                        
             valueLabel.topAnchor.constraint(equalTo: topAnchor),
-            valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            valueLabel.trailingAnchor.constraint(
-                equalTo: unitLabel.leadingAnchor,
-                constant: -GlobalMetrics.shortHorizontalSpacing
+            valueLabel.leadingAnchor.constraint(
+                greaterThanOrEqualTo: parameterLabel.trailingAnchor,
+                constant: GlobalMetrics.horizontalSpacing
             ),
+            valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             unitLabel.topAnchor.constraint(equalTo: topAnchor),
+            unitLabel.leadingAnchor.constraint(
+                equalTo: valueLabel.trailingAnchor,
+                constant: GlobalMetrics.shortHorizontalSpacing
+            ),
             unitLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             unitLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
@@ -66,13 +66,15 @@ final class ParameterView: UIView {
         
         switch model.style {
         case .plain:
-            valueLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        case .unit:
             valueLabel.font = .systemFont(ofSize: 16, weight: .regular)
+        case .unit:
+            valueLabel.font = .systemFont(ofSize: 16, weight: .bold)
             
             unitLabel.font = .systemFont(ofSize: 16, weight: .bold)
             unitLabel.textAlignment = .center
             unitLabel.textColor = GlobalMetrics.Colors.unitsTextColor
+            
+            unitLabel.widthAnchor.constraint(equalToConstant: 28).isActive = true
         }
     }
 

@@ -59,7 +59,7 @@ final class RocketInfoViewController: UIViewController {
         contentView.addSubview(firstStageView)
         contentView.addSubview(secondStageView)
         contentView.addSubview(launchesButton)
-        
+                
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         generalView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,41 +68,54 @@ final class RocketInfoViewController: UIViewController {
         launchesButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            generalView.topAnchor.constraint(equalTo: contentView.topAnchor),
             generalView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             generalView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            generalView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            generalView.bottomAnchor.constraint(
-                equalTo: firstStageView.topAnchor,
-                constant: -GlobalMetrics.longVerticalSpacing
+                        
+            firstStageView.topAnchor.constraint(
+                equalTo: generalView.bottomAnchor,
+                constant: GlobalMetrics.longVerticalSpacing
             ),
-            
-            firstStageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            firstStageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            firstStageView.bottomAnchor.constraint(
-                equalTo: secondStageView.topAnchor,
-                constant: -GlobalMetrics.longVerticalSpacing
+            firstStageView.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor,
+                constant: Metrics.horizontalSpacing
             ),
-            
+            firstStageView.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -Metrics.horizontalSpacing
+            ),
+                        
+            secondStageView.topAnchor.constraint(
+                equalTo: firstStageView.bottomAnchor,
+                constant: GlobalMetrics.longVerticalSpacing
+            ),
             secondStageView.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor
+                equalTo: contentView.leadingAnchor,
+                constant: Metrics.horizontalSpacing
             ),
             secondStageView.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor
-            ),
-            secondStageView.bottomAnchor.constraint(
-                equalTo: launchesButton.topAnchor,
-                constant: -GlobalMetrics.longVerticalSpacing
+                equalTo: contentView.trailingAnchor,
+                constant: -Metrics.horizontalSpacing
             ),
             
+            
+            launchesButton.topAnchor.constraint(
+                equalTo: secondStageView.bottomAnchor,
+                constant: GlobalMetrics.longVerticalSpacing
+            ),
             launchesButton.leadingAnchor.constraint(
-                equalTo: contentView.leadingAnchor
+                equalTo: contentView.leadingAnchor,
+                constant: Metrics.horizontalSpacing
             ),
             launchesButton.trailingAnchor.constraint(
-                equalTo: contentView.trailingAnchor
+                equalTo: contentView.trailingAnchor,
+                constant: -Metrics.horizontalSpacing
             ),
             launchesButton.bottomAnchor.constraint(
-                equalTo: contentView.bottomAnchor
-            )
+                equalTo: contentView.bottomAnchor,
+                constant: -Metrics.verticalSpacing
+            ),
+            launchesButton.heightAnchor.constraint(equalToConstant: 56)
         ])
 
         NSLayoutConstraint.activate([
@@ -119,6 +132,7 @@ final class RocketInfoViewController: UIViewController {
         ])
         
         launchesButton.setTitle("Посмотреть запуски", for: .normal)
+        launchesButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
         launchesButton.backgroundColor = GlobalMetrics.Colors.buttonBackgroundColor
         launchesButton.setTitleColor(GlobalMetrics.Colors.basicTextColor, for: .normal)
         launchesButton.layer.cornerRadius = 10

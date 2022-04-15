@@ -8,7 +8,7 @@
 import UIKit
 
 private enum Metrics {
-    static let generalViewVerticalSpacing: CGFloat = 32
+    static let generalViewlSpacing: CGFloat = 32
 }
 
 final class GeneralInfoView: UIView {
@@ -36,38 +36,62 @@ final class GeneralInfoView: UIView {
         launchCostView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            headerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: trailingAnchor),
             headerView.topAnchor.constraint(equalTo: topAnchor),
-            headerView.bottomAnchor.constraint(
-                equalTo: collectionView.topAnchor,
-                constant: -Metrics.generalViewVerticalSpacing
+            headerView.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Metrics.generalViewlSpacing
             ),
-            
+            headerView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -Metrics.generalViewlSpacing
+            ),
+                        
+            collectionView.topAnchor.constraint(
+                equalTo: headerView.bottomAnchor,
+                constant: Metrics.generalViewlSpacing
+            ),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.bottomAnchor.constraint(
-                equalTo: firstStartView.topAnchor,
-                constant: -GlobalMetrics.longVerticalSpacing
-            ),
             collectionView.heightAnchor.constraint(equalToConstant: 96),
             
-            firstStartView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            firstStartView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            firstStartView.bottomAnchor.constraint(
-                equalTo: countryView.topAnchor,
-                constant: -GlobalMetrics.verticalSpacing
+            firstStartView.topAnchor.constraint(
+                equalTo: collectionView.bottomAnchor,
+                constant: GlobalMetrics.longVerticalSpacing
+            ),
+            firstStartView.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Metrics.generalViewlSpacing
+            ),
+            firstStartView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -Metrics.generalViewlSpacing
             ),
             
-            countryView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            countryView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            countryView.bottomAnchor.constraint(
-                equalTo: launchCostView.topAnchor,
-                constant: -GlobalMetrics.verticalSpacing
+            countryView.topAnchor.constraint(
+                equalTo: firstStartView.bottomAnchor,
+                constant: GlobalMetrics.verticalSpacing
             ),
-
-            launchCostView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            launchCostView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            countryView.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Metrics.generalViewlSpacing
+            ),
+            countryView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -Metrics.generalViewlSpacing
+            ),
+           
+            launchCostView.topAnchor.constraint(
+                equalTo: countryView.bottomAnchor,
+                constant: GlobalMetrics.verticalSpacing
+            ),
+            launchCostView.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Metrics.generalViewlSpacing
+            ),
+            launchCostView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -Metrics.generalViewlSpacing
+            ),
             launchCostView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
         

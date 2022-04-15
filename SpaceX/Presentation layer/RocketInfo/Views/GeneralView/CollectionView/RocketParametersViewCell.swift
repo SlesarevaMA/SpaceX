@@ -37,20 +37,11 @@ final class RocketParametersViewCell: UICollectionViewCell {
             valueLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: GlobalMetrics.shortHorizontalSpacing),
-//            valueLabel.trailingAnchor.constraint(
-//                equalTo: trailingAnchor,
-//                constant: GlobalMetrics.shortHorizontalSpacing),
             
             parameterAndUnitLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor),
             parameterAndUnitLabel.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
                 constant: GlobalMetrics.shortHorizontalSpacing),
-//            parameterAndUnitLabel.trailingAnchor.constraint(
-//                equalTo: trailingAnchor,
-//                constant: GlobalMetrics.shortHorizontalSpacing),
-            parameterAndUnitLabel.bottomAnchor.constraint(
-                equalTo: bottomAnchor,
-                constant: Metrics.collectionViewCellBottomVerticalSpacing)
         ])
         
         configure()
