@@ -45,10 +45,6 @@ final class ParameterView: UIView {
             valueLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             unitLabel.topAnchor.constraint(equalTo: topAnchor),
-            unitLabel.leadingAnchor.constraint(
-                equalTo: valueLabel.trailingAnchor,
-                constant: GlobalMetrics.shortHorizontalSpacing
-            ),
             unitLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             unitLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
@@ -67,6 +63,8 @@ final class ParameterView: UIView {
         switch model.style {
         case .plain:
             valueLabel.font = .systemFont(ofSize: 16, weight: .regular)
+            
+            valueLabel.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         case .unit:
             valueLabel.font = .systemFont(ofSize: 16, weight: .bold)
             
@@ -74,6 +72,10 @@ final class ParameterView: UIView {
             unitLabel.textAlignment = .center
             unitLabel.textColor = GlobalMetrics.Colors.unitsTextColor
             
+            unitLabel.leadingAnchor.constraint(
+                equalTo: valueLabel.trailingAnchor,
+                constant: GlobalMetrics.shortHorizontalSpacing
+            ).isActive = true
             unitLabel.widthAnchor.constraint(equalToConstant: 28).isActive = true
         }
     }

@@ -7,6 +7,7 @@
 
 struct RocketViewModel {
     let rocketInfoModel: GeneralInfoViewModel
+    let cellViewModels: [RocketCollectionCellViewModel]
     let firstStageModel: StageViewModel
     let secondStageModel: StageViewModel
 }

@@ -55,7 +55,7 @@ final class RocketContainerViewController: UIViewController {
         
         var options = SheetOptions()
         options.presentingViewCornerRadius = 32
-        options.pullBarHeight = 0
+        options.pullBarHeight = 48
         
         let bottomSheet = SheetViewController(
             controller: rocketInfoViewController,
@@ -71,6 +71,7 @@ final class RocketContainerViewController: UIViewController {
         
         bottomSheet.handleScrollView(rocketInfoViewController.scrollView)
         bottomSheet.resize(to: .percent(0.7), animated: false)
+        bottomSheet.gripSize = .zero
         
         currentRocketViewController = rocketInfoViewController
     }

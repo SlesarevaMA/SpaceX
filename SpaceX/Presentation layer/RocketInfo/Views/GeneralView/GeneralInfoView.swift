@@ -13,7 +13,8 @@ private enum Metrics {
 
 final class GeneralInfoView: UIView {
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let collectionviewLayout = UICollectionViewFlowLayout()
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionviewLayout)
     
     private let headerView = HeaderView()
     private let firstStartView = ParameterView()

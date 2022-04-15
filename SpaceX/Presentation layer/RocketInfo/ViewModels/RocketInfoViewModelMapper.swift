@@ -38,17 +38,22 @@ final class RocketInfoViewModelMapper {
         
         let generalInfo = GeneralInfoViewModel(
             rocketName: model.name,
-            cellViewModels: [],
             firstStart: firstStart,
             country: country,
             launchCost: launchCostViewModel
         )
+        
+        let heightViewModel = RocketCollectionCellViewModel(parameter: "Высота, ft", value: String(model.height.feet))
+        let diameterViewModel = RocketCollectionCellViewModel(parameter: "Диаметр, ft", value: String(model.diameter.feet))
+        let massViewModel = RocketCollectionCellViewModel(parameter: "Масса, lb", value: String(model.mass.pounds))
+        let cellViewModels = [heightViewModel, diameterViewModel, massViewModel]
         
         let firstStage = mapStage(model: model.firstStage)
         let secondStage = mapStage(model: model.secondStage)
         
         return RocketViewModel(
             rocketInfoModel: generalInfo,
+            cellViewModels: cellViewModels,
             firstStageModel: firstStage,
             secondStageModel: secondStage
         )

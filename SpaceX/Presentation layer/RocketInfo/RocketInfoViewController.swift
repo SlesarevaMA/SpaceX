@@ -17,19 +17,24 @@ final class RocketInfoViewController: UIViewController {
     let scrollView = UIScrollView()
     
     private let contentView = UIView()
-    
     private let generalView = GeneralInfoView()
     private let firstStageView = StageView()
     private let secondStageView = StageView()
     private let launchesButton = UIButton()
     
-    private let parameters = [RocketParametersViewCellModel]()
+    private var parameters = [RocketCollectionCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let collectionViewLayout = generalView.collectionviewLayout
+        collectionViewLayout.itemSize = CGSize(width: 96, height: 96)
+        collectionViewLayout.minimumInteritemSpacing = 12
+        collectionViewLayout.scrollDirection = .horizontal
         generalView.collectionView.dataSource = self
         generalView.collectionView.register(RocketParametersViewCell.self, forCellWithReuseIdentifier: "RocketParametersViewCell")
+        generalView.collectionView.contentInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
+        generalView.collectionView.showsHorizontalScrollIndicator = false
 
         addSubViews()
     }
@@ -128,10 +133,12 @@ final class RocketInfoViewController: UIViewController {
         generalView.configure(with: model.rocketInfoModel)
         firstStageView.configureModel(model.firstStageModel)
         secondStageView.configureModel(model.secondStageModel)
+        parameters = model.cellViewModels
+        generalView.collectionView.reloadData()
     }
 }
 
-extension RocketInfoViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension RocketInfoViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return parameters.count
     }

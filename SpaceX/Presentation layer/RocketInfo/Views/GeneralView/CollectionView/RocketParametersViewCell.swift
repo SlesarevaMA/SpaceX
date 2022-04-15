@@ -8,8 +8,8 @@
 import UIKit
 
 private enum Metrics {
-    static let collectionViewCellTopVerticalSpacing: CGFloat = 28
-    static let collectionViewCellBottomVerticalSpacing: CGFloat = 24
+    static let topVerticalSpacing: CGFloat = 28
+    static let bottomVerticalSpacing: CGFloat = 24
 }
 
 final class RocketParametersViewCell: UICollectionViewCell {
@@ -24,24 +24,38 @@ final class RocketParametersViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(valueLabel)
-        addSubview(parameterAndUnitLabel)
+        contentView.backgroundColor = UIColor(hex: 0x212121)
+        contentView.layer.cornerRadius = 32
+        
+        contentView.addSubview(valueLabel)
+        contentView.addSubview(parameterAndUnitLabel)
         
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         parameterAndUnitLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             valueLabel.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: Metrics.collectionViewCellTopVerticalSpacing),
+                equalTo: contentView.topAnchor,
+                constant: Metrics.topVerticalSpacing
+            ),
             valueLabel.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
-                constant: GlobalMetrics.shortHorizontalSpacing),
+                equalTo: contentView.leadingAnchor,
+                constant: GlobalMetrics.shortHorizontalSpacing
+            ),
+            valueLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -GlobalMetrics.shortHorizontalSpacing
+            ),
             
             parameterAndUnitLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor),
             parameterAndUnitLabel.leadingAnchor.constraint(
-                equalTo: leadingAnchor,
-                constant: GlobalMetrics.shortHorizontalSpacing),
+                equalTo: contentView.leadingAnchor,
+                constant: GlobalMetrics.shortHorizontalSpacing
+            ),
+            parameterAndUnitLabel.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor,
+                constant: -GlobalMetrics.shortHorizontalSpacing
+            ),
         ])
         
         configure()
@@ -51,9 +65,9 @@ final class RocketParametersViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureCell(with model: RocketParametersViewCellModel) {
-        valueLabel.text = "\(model.value)"
-        parameterAndUnitLabel.text = "\(model.parameter), \(model.unit)"
+    func configureCell(with model: RocketCollectionCellViewModel) {
+        valueLabel.text = model.value
+        parameterAndUnitLabel.text = model.parameter
     }
     
     private func configure() {

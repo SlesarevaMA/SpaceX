@@ -7,7 +7,6 @@
 
 struct GeneralInfoViewModel {
     let rocketName: String
-    let cellViewModels: [RocketCollectionCellViewModel]
     let firstStart: ParameterViewModel
     let country: ParameterViewModel
     let launchCost: ParameterViewModel?
