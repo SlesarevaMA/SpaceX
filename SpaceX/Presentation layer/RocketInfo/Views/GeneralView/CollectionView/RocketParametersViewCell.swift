@@ -75,7 +75,8 @@ final class RocketParametersViewCell: UICollectionViewCell {
         valueLabel.textAlignment = .center
         valueLabel.textColor = GlobalMetrics.Colors.lightTextColor
         
-        parameterAndUnitLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        parameterAndUnitLabel.font = .systemFont(ofSize: 13, weight: .regular)
+        parameterAndUnitLabel.minimumScaleFactor = 0.8
         parameterAndUnitLabel.textAlignment = .center
         parameterAndUnitLabel.textColor = GlobalMetrics.Colors.unitsTextColor
     }

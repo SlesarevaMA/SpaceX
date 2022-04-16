@@ -28,14 +28,7 @@ final class RocketInfoServiceImpl: RocketInfoService {
         
         networkManager.sendRequest(request: dataRequest) { result in
             switch result {
-            case .success(let data):
-//                do {
-//                    let rockets = try self.decoder.decode([RocketAPIModel].self, from: data)
-//                    rockets.forEach { print($0) }
-//                } catch {
-//                    print(error)
-//                }
-                
+            case .success(let data):                
                 if let rockets = try? self.decoder.decode([RocketAPIModel].self, from: data) {
                     completion(.success(rockets))
                 } else {

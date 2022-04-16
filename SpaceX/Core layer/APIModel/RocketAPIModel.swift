@@ -17,5 +17,6 @@ struct RocketAPIModel: Codable {
     let height: Length
     let diameter: Length
     let mass: Mass
+    let payloadWeights: [PayloadWeight]
     let flickrImages: [URL]
 }

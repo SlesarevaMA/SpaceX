@@ -19,21 +19,27 @@ final class RocketInfoViewModelMapper {
     
     static let moneyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 1
         formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
         
         return formatter
     }()
     
     func map(model: RocketAPIModel) -> RocketViewModel {
         let firstFlightDate = RocketInfoViewModelMapper.dateFormatter.string(from: model.firstFlight)
-        let launchCost = RocketInfoViewModelMapper.moneyFormatter.string(from: NSNumber(integerLiteral: model.costPerLaunch))
+        
+        
+        let launchCostTransform = Float(model.costPerLaunch) / 1000000
+    
+        let launchCost = RocketInfoViewModelMapper.moneyFormatter.string(from: NSNumber(value: launchCostTransform))
         
         let firstStart = ParameterViewModel(value: firstFlightDate)
         let country = ParameterViewModel(value: model.country)
         
         var launchCostViewModel: ParameterViewModel?
         if let launchCost = launchCost {
-            launchCostViewModel = ParameterViewModel(value: launchCost)
+            launchCostViewModel = ParameterViewModel(value: "\(launchCost)млн")
         }
         
         let generalInfo = GeneralInfoViewModel(
@@ -43,10 +49,22 @@ final class RocketInfoViewModelMapper {
             launchCost: launchCostViewModel
         )
         
+        
+        
         let heightViewModel = RocketCollectionCellViewModel(parameter: "Высота, ft", value: String(model.height.feet))
         let diameterViewModel = RocketCollectionCellViewModel(parameter: "Диаметр, ft", value: String(model.diameter.feet))
         let massViewModel = RocketCollectionCellViewModel(parameter: "Масса, lb", value: String(model.mass.pounds))
-        let cellViewModels = [heightViewModel, diameterViewModel, massViewModel]
+        
+        var cellViewModels = [heightViewModel, diameterViewModel, massViewModel]
+        
+        if let payloadWeight = model.payloadWeights.first(where: { $0.id == "leo" }) {
+            let payloadWeightViewModel = RocketCollectionCellViewModel(
+                parameter: "Нагрузка, lb",
+                value: String(payloadWeight.lb)
+            )
+            cellViewModels.append(payloadWeightViewModel)
+        }
+        
         
         let firstStage = mapStage(model: model.firstStage)
         let secondStage = mapStage(model: model.secondStage)
@@ -72,5 +90,4 @@ final class RocketInfoViewModelMapper {
             burnTime: burnTimeViewModel
         )
     }
-    
 }

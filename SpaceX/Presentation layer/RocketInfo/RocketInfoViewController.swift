@@ -86,7 +86,6 @@ final class RocketInfoViewController: UIViewController {
                 constant: -Metrics.horizontalSpacing
             ),
             
-            
             launchesButton.topAnchor.constraint(
                 equalTo: secondStageView.bottomAnchor,
                 constant: GlobalMetrics.longVerticalSpacing
@@ -149,7 +148,6 @@ extension RocketInfoViewController: UICollectionViewDataSource {
         }
         
         let parameter = parameters[indexPath.item]
-        
         cell.configureCell(with: parameter)
         
         return cell
