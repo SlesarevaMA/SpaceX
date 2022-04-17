@@ -46,6 +46,11 @@ final class RocketInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        prepareCollectionView()
+        addSubViews()
+    }
+    
+    private func prepareCollectionView() {
         let collectionViewLayout = generalView.collectionviewLayout
         collectionViewLayout.itemSize = CGSize(width: 96, height: 96)
         collectionViewLayout.minimumInteritemSpacing = 12
@@ -54,11 +59,16 @@ final class RocketInfoViewController: UIViewController {
         generalView.collectionView.register(RocketParametersViewCell.self, forCellWithReuseIdentifier: "RocketParametersViewCell")
         generalView.collectionView.contentInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
         generalView.collectionView.showsHorizontalScrollIndicator = false
-
-        addSubViews()
     }
     
     private func addSubViews() {
+        generalView.didTapSettingsButton = { [weak self] in
+            guard let settingsViewController = self?.presentationAssemlby?.settingsViewController() else {
+                return
+            }
+            self?.present(settingsViewController, animated: true)
+        }
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         

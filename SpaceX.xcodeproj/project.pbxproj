@@ -18,6 +18,8 @@
 		5C23BF37280CA3510001F4CC /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C23BF36280CA3510001F4CC /* CoreAssembly.swift */; };
 		5C23BF39280CA39C0001F4CC /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C23BF38280CA39C0001F4CC /* ServiceAssembly.swift */; };
 		5C23BF3B280CA44B0001F4CC /* PresentationAssemlby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C23BF3A280CA44B0001F4CC /* PresentationAssemlby.swift */; };
+		5C23BF3D280CAC560001F4CC /* UserInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C23BF3C280CAC560001F4CC /* UserInfoStorage.swift */; };
+		5C23BF40280CB0DD0001F4CC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C23BF3F280CB0DD0001F4CC /* SettingsViewController.swift */; };
 		5C438261280B803000C39CE5 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C438260280B803000C39CE5 /* LaunchViewModel.swift */; };
 		5C5A2167280B15FA00B96A91 /* LaunchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A2166280B15FA00B96A91 /* LaunchesViewController.swift */; };
 		5C5A2169280B169C00B96A91 /* RocketInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A2168280B169C00B96A91 /* RocketInfoService.swift */; };
@@ -65,6 +67,8 @@
 		5C23BF36280CA3510001F4CC /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		5C23BF38280CA39C0001F4CC /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		5C23BF3A280CA44B0001F4CC /* PresentationAssemlby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssemlby.swift; sourceTree = "<group>"; };
+		5C23BF3C280CAC560001F4CC /* UserInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoStorage.swift; sourceTree = "<group>"; };
+		5C23BF3F280CB0DD0001F4CC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		5C438260280B803000C39CE5 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		5C5A2166280B15FA00B96A91 /* LaunchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewController.swift; sourceTree = "<group>"; };
 		5C5A2168280B169C00B96A91 /* RocketInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketInfoService.swift; sourceTree = "<group>"; };
@@ -135,6 +139,14 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		5C23BF3E280CB0C70001F4CC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5C23BF3F280CB0DD0001F4CC /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		5C5A2165280B15E700B96A91 /* Launches */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +187,7 @@
 		5C7F305227EE269000B195F9 /* Presentation layer */ = {
 			isa = PBXGroup;
 			children = (
+				5C23BF3E280CB0C70001F4CC /* Settings */,
 				5C9D7A9C2808BBE100B7F3D2 /* ViewModelMapper.swift */,
 				5C5A2165280B15E700B96A91 /* Launches */,
 				5CE5043B2809F3A300FB5071 /* RocketContainer */,
@@ -201,6 +214,7 @@
 				5C01B87F28061484008F670D /* Requests */,
 				5C708A7127F0C87700F8B582 /* RequestError.swift */,
 				5C01B87B280613DC008F670D /* NetworkManager.swift */,
+				5C23BF3C280CAC560001F4CC /* UserInfoStorage.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -430,8 +444,10 @@
 				5C9D7A992808B86D00B7F3D2 /* RocketInfoJSONDecoder.swift in Sources */,
 				5C7F305827EE2F0200B195F9 /* RocketInfoViewController.swift in Sources */,
 				5C7AD2E227E931500095B780 /* StageView.swift in Sources */,
+				5C23BF3D280CAC560001F4CC /* UserInfoStorage.swift in Sources */,
 				5C6CC0B227ECA94500F8B9B6 /* RocketParametersViewCell.swift in Sources */,
 				5C7F305427EE2B0B00B195F9 /* RocketInfoRequest.swift in Sources */,
+				5C23BF40280CB0DD0001F4CC /* SettingsViewController.swift in Sources */,
 				5C9D7AA02808BD3300B7F3D2 /* ParameterViewModel.swift in Sources */,
 				5C6CC0A927EB3F6000F8B9B6 /* UIColor+extension.swift in Sources */,
 				5CCDD8E828046C360068DCA0 /* RocketViewModel.swift in Sources */,

@@ -8,32 +8,37 @@
 import UIKit
 
 final class HeaderView: UIView {
+    
+    var didTapSettingsButton: (() -> Void)?
+    
     private let headerLabel = UILabel()
-    private let setButton = UIButton()
+    private let settingsButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        settingsButton.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        
         addSubview(headerLabel)
-        addSubview(setButton)
+        addSubview(settingsButton)
         
         headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        setButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             headerLabel.topAnchor.constraint(equalTo: topAnchor),
             headerLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             headerLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            setButton.topAnchor.constraint(equalTo: topAnchor),
-            setButton.leadingAnchor.constraint(
+            settingsButton.topAnchor.constraint(equalTo: topAnchor),
+            settingsButton.leadingAnchor.constraint(
                 greaterThanOrEqualTo: headerLabel.trailingAnchor,
                 constant: GlobalMetrics.horizontalSpacing
             ),
 
-            setButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            setButton.widthAnchor.constraint(equalToConstant: 26),
-            setButton.heightAnchor.constraint(equalToConstant: 28)
+            settingsButton.trailingAnchor.constraint(equalTo: trailingAnchor),
+            settingsButton.widthAnchor.constraint(equalToConstant: 26),
+            settingsButton.heightAnchor.constraint(equalToConstant: 28)
         ])
     
         configureItems()
@@ -53,7 +58,11 @@ final class HeaderView: UIView {
         headerLabel.textAlignment = .left
         headerLabel.textColor = GlobalMetrics.Colors.basicTextColor
         
-        setButton.setImage(UIImage(named: "settings"), for: .normal)
-        setButton.tintColor = GlobalMetrics.Colors.basicColor
+        settingsButton.setImage(UIImage(named: "settings"), for: .normal)
+        settingsButton.tintColor = GlobalMetrics.Colors.basicColor
+    }
+    
+    @objc private func settingsButtonTapped() {
+        didTapSettingsButton?()
     }
 }

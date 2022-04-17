@@ -13,6 +13,8 @@ private enum Metrics {
 
 final class GeneralInfoView: UIView {
     
+    var didTapSettingsButton: (() -> Void)?
+    
     let collectionviewLayout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionviewLayout)
     
@@ -23,6 +25,10 @@ final class GeneralInfoView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        headerView.didTapSettingsButton = { [weak self] in
+            self?.didTapSettingsButton?()
+        }
         
         addSubview(headerView)
         addSubview(collectionView)

@@ -15,7 +15,7 @@ protocol ViewModelMapper {
 
 final class ViewModelMapperImpl: ViewModelMapper {
     
-    private static let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
@@ -23,7 +23,7 @@ final class ViewModelMapperImpl: ViewModelMapper {
         return formatter
     }()
     
-    private static let moneyFormatter: NumberFormatter = {
+    private let moneyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 1
         formatter.numberStyle = .currency
@@ -32,9 +32,15 @@ final class ViewModelMapperImpl: ViewModelMapper {
         return formatter
     }()
     
+    private let userInfoStorage: UserInfoStorage
+    
+    init(userInfoStorage: UserInfoStorage) {
+        self.userInfoStorage = userInfoStorage
+    }
+    
     func map(launchModel: Launch) -> LaunchViewModel {
         let dateUnix = Date(timeIntervalSince1970: launchModel.dateUnix)
-        let date = Self.dateFormatter.string(from: dateUnix)
+        let date = dateFormatter.string(from: dateUnix)
         
         return LaunchViewModel(
             launchImage: UIImage(),
@@ -44,10 +50,10 @@ final class ViewModelMapperImpl: ViewModelMapper {
     }
     
     func map(rocketModel: Rocket) -> RocketViewModel {
-        let firstFlightDate = Self.dateFormatter.string(from: rocketModel.firstFlight)
+        let firstFlightDate = dateFormatter.string(from: rocketModel.firstFlight)
         
         let launchCostMillions = Float(rocketModel.costPerLaunch) / 1000000
-        let launchCost = Self.moneyFormatter.string(from: NSNumber(value: launchCostMillions))
+        let launchCost = moneyFormatter.string(from: NSNumber(value: launchCostMillions))
         
         let firstStart = ParameterViewModel(value: firstFlightDate)
         let country = ParameterViewModel(value: rocketModel.country)
@@ -64,17 +70,35 @@ final class ViewModelMapperImpl: ViewModelMapper {
             launchCost: launchCostViewModel
         )
         
-        let heightViewModel = RocketCollectionCellViewModel(parameter: "Высота, ft", value: String(rocketModel.height.feet))
-        let diameterViewModel = RocketCollectionCellViewModel(parameter: "Диаметр, ft", value: String(rocketModel.diameter.feet))
-        let massViewModel = RocketCollectionCellViewModel(parameter: "Масса, lb", value: String(rocketModel.mass.pounds))
+        let sizeUnit = userInfoStorage.getSizeUnit()
+        let weightUnit = userInfoStorage.getWeightUnit()
+        
+        let height = sizeUnit == .m ? String(rocketModel.height.meters) : String(rocketModel.height.feet)
+        let diameter = sizeUnit == .m ? String(rocketModel.diameter.meters) : String(rocketModel.diameter.feet)
+        let mass = weightUnit == .kg ? String(rocketModel.mass.kilograms) : String(rocketModel.mass.pounds)
+        
+        let heightViewModel = RocketCollectionCellViewModel(
+            parameter: "Высота, \(sizeUnit.rawValue)",
+            value: height
+        )
+        let diameterViewModel = RocketCollectionCellViewModel(
+            parameter: "Диаметр, \(sizeUnit.rawValue)",
+            value: diameter
+        )
+        let massViewModel = RocketCollectionCellViewModel(
+            parameter: "Масса, \(weightUnit.rawValue)",
+            value: mass
+        )
         
         var cellViewModels = [heightViewModel, diameterViewModel, massViewModel]
         
         if let payloadWeight = rocketModel.payloadWeights.first(where: { $0.id == "leo" }) {
+            let payload = weightUnit == .kg ? String(payloadWeight.kg) : String(payloadWeight.lb)
             let payloadWeightViewModel = RocketCollectionCellViewModel(
-                parameter: "Нагрузка, lb",
-                value: String(payloadWeight.lb)
+                parameter: "Нагрузка, \(weightUnit.rawValue)",
+                value: payload
             )
+            
             cellViewModels.append(payloadWeightViewModel)
         }
         

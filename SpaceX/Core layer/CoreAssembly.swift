@@ -11,4 +11,5 @@ final class CoreAssemlby {
     static let networkManager: NetworkManager = NetworkManagerImpl()
     static let rocketInfoDecoder: JSONDecoder = RocketInfoJSONDecoder()
     static let launchesJSONDecoder: JSONDecoder = LaunchesJSONDecoder()
+    static let userInfoStorage: UserInfoStorage = UserInfoStargeImpl()
 }
