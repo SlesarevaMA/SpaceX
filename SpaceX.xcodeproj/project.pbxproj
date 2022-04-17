@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C01B87A28061374008F670D /* RocketInfoRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B87928061374008F670D /* RocketInfoRequestService.swift */; };
 		5C01B87C280613DC008F670D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B87B280613DC008F670D /* NetworkManager.swift */; };
 		5C01B87E28061470008F670D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B87D28061470008F670D /* Request.swift */; };
 		5C01B88128061525008F670D /* RequestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B88028061525008F670D /* RequestConstants.swift */; };
 		5C01B88328061959008F670D /* LaunchesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B88228061959008F670D /* LaunchesRequest.swift */; };
-		5C01B88728061DBF008F670D /* LaunchesRequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B88628061DBF008F670D /* LaunchesRequestService.swift */; };
+		5C01B88728061DBF008F670D /* LaunchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B88628061DBF008F670D /* LaunchesService.swift */; };
 		5C01B8892806235B008F670D /* GeneralInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C01B8882806235B008F670D /* GeneralInfoView.swift */; };
+		5C19B2DB280C1B260046F581 /* LaunchesJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19B2DA280C1B260046F581 /* LaunchesJSONDecoder.swift */; };
+		5C19B2DD280C34AB0046F581 /* LaunchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C19B2DC280C34AB0046F581 /* LaunchCell.swift */; };
+		5C438261280B803000C39CE5 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C438260280B803000C39CE5 /* LaunchViewModel.swift */; };
+		5C5A2167280B15FA00B96A91 /* LaunchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A2166280B15FA00B96A91 /* LaunchesViewController.swift */; };
+		5C5A2169280B169C00B96A91 /* RocketInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A2168280B169C00B96A91 /* RocketInfoService.swift */; };
+		5C5A216B280B16DC00B96A91 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5A216A280B16DC00B96A91 /* Launch.swift */; };
 		5C6C209127FC7C6900777FED /* RocketCollectionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C209027FC7C6900777FED /* RocketCollectionCellViewModel.swift */; };
 		5C6C209327FC7C9D00777FED /* StageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6C209227FC7C9D00777FED /* StageViewModel.swift */; };
 		5C6CC0A927EB3F6000F8B9B6 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6CC0A827EB3F6000F8B9B6 /* UIColor+extension.swift */; };
@@ -25,11 +30,11 @@
 		5C7AD2E627E933F50095B780 /* GlobalMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7AD2E527E933F50095B780 /* GlobalMetrics.swift */; };
 		5C7F305427EE2B0B00B195F9 /* RocketInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7F305327EE2B0B00B195F9 /* RocketInfoRequest.swift */; };
 		5C7F305827EE2F0200B195F9 /* RocketInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7F305727EE2F0200B195F9 /* RocketInfoViewController.swift */; };
-		5C9D7A912808AD6F00B7F3D2 /* RocketAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A902808AD6F00B7F3D2 /* RocketAPIModel.swift */; };
+		5C9D7A912808AD6F00B7F3D2 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A902808AD6F00B7F3D2 /* Rocket.swift */; };
 		5C9D7A932808B7D900B7F3D2 /* Stage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A922808B7D900B7F3D2 /* Stage.swift */; };
 		5C9D7A952808B7F500B7F3D2 /* Length.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A942808B7F500B7F3D2 /* Length.swift */; };
 		5C9D7A972808B80B00B7F3D2 /* Mass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A962808B80B00B7F3D2 /* Mass.swift */; };
-		5C9D7A992808B86D00B7F3D2 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A982808B86D00B7F3D2 /* Decoder.swift */; };
+		5C9D7A992808B86D00B7F3D2 /* RocketInfoJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A982808B86D00B7F3D2 /* RocketInfoJSONDecoder.swift */; };
 		5C9D7A9D2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A9C2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift */; };
 		5C9D7AA02808BD3300B7F3D2 /* ParameterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D7A9F2808BD3300B7F3D2 /* ParameterViewModel.swift */; };
 		5CCDD8E828046C360068DCA0 /* RocketViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCDD8E728046C360068DCA0 /* RocketViewModel.swift */; };
@@ -46,13 +51,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5C01B87928061374008F670D /* RocketInfoRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoRequestService.swift; sourceTree = "<group>"; };
 		5C01B87B280613DC008F670D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5C01B87D28061470008F670D /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		5C01B88028061525008F670D /* RequestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConstants.swift; sourceTree = "<group>"; };
 		5C01B88228061959008F670D /* LaunchesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesRequest.swift; sourceTree = "<group>"; };
-		5C01B88628061DBF008F670D /* LaunchesRequestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesRequestService.swift; sourceTree = "<group>"; };
+		5C01B88628061DBF008F670D /* LaunchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesService.swift; sourceTree = "<group>"; };
 		5C01B8882806235B008F670D /* GeneralInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralInfoView.swift; sourceTree = "<group>"; };
+		5C19B2DA280C1B260046F581 /* LaunchesJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesJSONDecoder.swift; sourceTree = "<group>"; };
+		5C19B2DC280C34AB0046F581 /* LaunchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCell.swift; sourceTree = "<group>"; };
+		5C438260280B803000C39CE5 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
+		5C5A2166280B15FA00B96A91 /* LaunchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewController.swift; sourceTree = "<group>"; };
+		5C5A2168280B169C00B96A91 /* RocketInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketInfoService.swift; sourceTree = "<group>"; };
+		5C5A216A280B16DC00B96A91 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 		5C6C209027FC7C6900777FED /* RocketCollectionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketCollectionCellViewModel.swift; sourceTree = "<group>"; };
 		5C6C209227FC7C9D00777FED /* StageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageViewModel.swift; sourceTree = "<group>"; };
 		5C6CC0A827EB3F6000F8B9B6 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
@@ -64,11 +74,11 @@
 		5C7AD2E527E933F50095B780 /* GlobalMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalMetrics.swift; sourceTree = "<group>"; };
 		5C7F305327EE2B0B00B195F9 /* RocketInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoRequest.swift; sourceTree = "<group>"; };
 		5C7F305727EE2F0200B195F9 /* RocketInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoViewController.swift; sourceTree = "<group>"; };
-		5C9D7A902808AD6F00B7F3D2 /* RocketAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketAPIModel.swift; sourceTree = "<group>"; };
+		5C9D7A902808AD6F00B7F3D2 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
 		5C9D7A922808B7D900B7F3D2 /* Stage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stage.swift; sourceTree = "<group>"; };
 		5C9D7A942808B7F500B7F3D2 /* Length.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Length.swift; sourceTree = "<group>"; };
 		5C9D7A962808B80B00B7F3D2 /* Mass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mass.swift; sourceTree = "<group>"; };
-		5C9D7A982808B86D00B7F3D2 /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		5C9D7A982808B86D00B7F3D2 /* RocketInfoJSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoJSONDecoder.swift; sourceTree = "<group>"; };
 		5C9D7A9C2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketInfoViewModelMapper.swift; sourceTree = "<group>"; };
 		5C9D7A9F2808BD3300B7F3D2 /* ParameterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterViewModel.swift; sourceTree = "<group>"; };
 		5CCDD8E728046C360068DCA0 /* RocketViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketViewModel.swift; sourceTree = "<group>"; };
@@ -100,8 +110,8 @@
 		5C01B878280612FB008F670D /* Service layer */ = {
 			isa = PBXGroup;
 			children = (
-				5C01B87928061374008F670D /* RocketInfoRequestService.swift */,
-				5C01B88628061DBF008F670D /* LaunchesRequestService.swift */,
+				5C5A2168280B169C00B96A91 /* RocketInfoService.swift */,
+				5C01B88628061DBF008F670D /* LaunchesService.swift */,
 			);
 			path = "Service layer";
 			sourceTree = "<group>";
@@ -116,6 +126,16 @@
 				5CEDD9AD280A021700C2FB9D /* SimpleURLRequest.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		5C5A2165280B15E700B96A91 /* Launches */ = {
+			isa = PBXGroup;
+			children = (
+				5C5A2166280B15FA00B96A91 /* LaunchesViewController.swift */,
+				5C438260280B803000C39CE5 /* LaunchViewModel.swift */,
+				5C19B2DC280C34AB0046F581 /* LaunchCell.swift */,
+			);
+			path = Launches;
 			sourceTree = "<group>";
 		};
 		5C6CC0AA27EB405400F8B9B6 /* Helpers */ = {
@@ -147,9 +167,10 @@
 		5C7F305227EE269000B195F9 /* Presentation layer */ = {
 			isa = PBXGroup;
 			children = (
-				5C7AD2E527E933F50095B780 /* GlobalMetrics.swift */,
+				5C9D7A9C2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift */,
+				5C5A2165280B15E700B96A91 /* Launches */,
 				5CE5043B2809F3A300FB5071 /* RocketContainer */,
-				5C935A8927FBB492006AFBB4 /* RocketInfo */,
+				5C7AD2E527E933F50095B780 /* GlobalMetrics.swift */,
 				5C7939DC27EFE76D00C00C08 /* Constants.swift */,
 			);
 			path = "Presentation layer";
@@ -178,7 +199,8 @@
 		5C9D7A9B2808BAFB00B7F3D2 /* Decoding */ = {
 			isa = PBXGroup;
 			children = (
-				5C9D7A982808B86D00B7F3D2 /* Decoder.swift */,
+				5C9D7A982808B86D00B7F3D2 /* RocketInfoJSONDecoder.swift */,
+				5C19B2DA280C1B260046F581 /* LaunchesJSONDecoder.swift */,
 			);
 			path = Decoding;
 			sourceTree = "<group>";
@@ -186,7 +208,6 @@
 		5C9D7A9E2808BC2C00B7F3D2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				5C9D7A9C2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift */,
 				5C6C209227FC7C9D00777FED /* StageViewModel.swift */,
 				5CCDD8E728046C360068DCA0 /* RocketViewModel.swift */,
 				5CF924E42808A28100356BFB /* GeneralInfoViewModel.swift */,
@@ -209,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				5CE5043C2809F3BA00FB5071 /* RocketContainerViewController.swift */,
+				5C935A8927FBB492006AFBB4 /* RocketInfo */,
 			);
 			path = RocketContainer;
 			sourceTree = "<group>";
@@ -283,11 +305,12 @@
 		5CF924E62808A9FC00356BFB /* APIModel */ = {
 			isa = PBXGroup;
 			children = (
-				5C9D7A902808AD6F00B7F3D2 /* RocketAPIModel.swift */,
+				5C9D7A902808AD6F00B7F3D2 /* Rocket.swift */,
 				5C9D7A922808B7D900B7F3D2 /* Stage.swift */,
 				5C9D7A942808B7F500B7F3D2 /* Length.swift */,
 				5C9D7A962808B80B00B7F3D2 /* Mass.swift */,
 				5CEDD9AF280A1E7600C2FB9D /* PayloadWeight.swift */,
+				5C5A216A280B16DC00B96A91 /* Launch.swift */,
 			);
 			path = APIModel;
 			sourceTree = "<group>";
@@ -369,11 +392,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C708A7227F0C87700F8B582 /* RequestError.swift in Sources */,
+				5C5A2169280B169C00B96A91 /* RocketInfoService.swift in Sources */,
+				5C19B2DB280C1B260046F581 /* LaunchesJSONDecoder.swift in Sources */,
 				5C01B88328061959008F670D /* LaunchesRequest.swift in Sources */,
-				5C01B88728061DBF008F670D /* LaunchesRequestService.swift in Sources */,
+				5C01B88728061DBF008F670D /* LaunchesService.swift in Sources */,
 				5C6CC0AC27EB5FFA00F8B9B6 /* HeaderView.swift in Sources */,
 				5CE6F9A427E54677004499EA /* AppDelegate.swift in Sources */,
 				5C9D7A952808B7F500B7F3D2 /* Length.swift in Sources */,
+				5C19B2DD280C34AB0046F581 /* LaunchCell.swift in Sources */,
 				5CEDD9AE280A021700C2FB9D /* SimpleURLRequest.swift in Sources */,
 				5C7AD2E627E933F50095B780 /* GlobalMetrics.swift in Sources */,
 				5C6C209327FC7C9D00777FED /* StageViewModel.swift in Sources */,
@@ -383,12 +409,13 @@
 				5C01B8892806235B008F670D /* GeneralInfoView.swift in Sources */,
 				5C7939DD27EFE76D00C00C08 /* Constants.swift in Sources */,
 				5CF3B39227E7884C00EBC28A /* ParameterView.swift in Sources */,
+				5C5A2167280B15FA00B96A91 /* LaunchesViewController.swift in Sources */,
 				5C01B87E28061470008F670D /* Request.swift in Sources */,
+				5C5A216B280B16DC00B96A91 /* Launch.swift in Sources */,
 				5C01B87C280613DC008F670D /* NetworkManager.swift in Sources */,
-				5C9D7A912808AD6F00B7F3D2 /* RocketAPIModel.swift in Sources */,
+				5C9D7A912808AD6F00B7F3D2 /* Rocket.swift in Sources */,
 				5CE6F9A627E54677004499EA /* SceneDelegate.swift in Sources */,
-				5C01B87A28061374008F670D /* RocketInfoRequestService.swift in Sources */,
-				5C9D7A992808B86D00B7F3D2 /* Decoder.swift in Sources */,
+				5C9D7A992808B86D00B7F3D2 /* RocketInfoJSONDecoder.swift in Sources */,
 				5C7F305827EE2F0200B195F9 /* RocketInfoViewController.swift in Sources */,
 				5C7AD2E227E931500095B780 /* StageView.swift in Sources */,
 				5C6CC0B227ECA94500F8B9B6 /* RocketParametersViewCell.swift in Sources */,
@@ -401,6 +428,7 @@
 				5C9D7A972808B80B00B7F3D2 /* Mass.swift in Sources */,
 				5CEDD9B0280A1E7600C2FB9D /* PayloadWeight.swift in Sources */,
 				5C9D7A9D2808BBE100B7F3D2 /* RocketInfoViewModelMapper.swift in Sources */,
+				5C438261280B803000C39CE5 /* LaunchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

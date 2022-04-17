@@ -1,5 +1,5 @@
 //
-//  Decoder.swift
+//  RocketInfoJSONDecoder.swift
 //  SpaceX
 //
 //  Created by Margarita Slesareva on 14.04.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SpaceXJSONDecoder: JSONDecoder {
+final class RocketInfoJSONDecoder: JSONDecoder {
     
     override init() {
         super.init()

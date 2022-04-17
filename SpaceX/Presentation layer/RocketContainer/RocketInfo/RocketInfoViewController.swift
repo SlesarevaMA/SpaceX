@@ -24,6 +24,8 @@ final class RocketInfoViewController: UIViewController {
     
     private var parameters = [RocketCollectionCellViewModel]()
     
+    private var rocketId: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,9 +125,14 @@ final class RocketInfoViewController: UIViewController {
         launchesButton.backgroundColor = GlobalMetrics.Colors.buttonBackgroundColor
         launchesButton.setTitleColor(GlobalMetrics.Colors.basicTextColor, for: .normal)
         launchesButton.layer.cornerRadius = 10
+        launchesButton.addTarget(self, action: #selector(showLaunches), for: .touchUpInside)
         
         firstStageView.stageNumberLabel.text = "ПЕРВАЯ СТУПЕНЬ"
         secondStageView.stageNumberLabel.text = "ВТОРАЯ СТУПЕНЬ"
+    }
+    
+    func setRocketId(_ rocketId: String?) {
+        self.rocketId = rocketId
     }
     
     func configure(with model: RocketViewModel) {
@@ -134,6 +141,14 @@ final class RocketInfoViewController: UIViewController {
         secondStageView.configureModel(model.secondStageModel)
         parameters = model.cellViewModels
         generalView.collectionView.reloadData()
+    }
+    
+    @objc private func showLaunches() {
+        let launchesViewController = LaunchesViewController()
+        launchesViewController.rocketId = rocketId
+        
+        navigationController?.pushViewController(launchesViewController, animated: true)
+//        present(launchesViewController, animated: true)
     }
 }
 

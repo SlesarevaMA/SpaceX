@@ -11,7 +11,7 @@ import FittedSheets
 final class RocketContainerViewController: UIViewController {
     
     private let rocketInfoService: RocketInfoService
-    private let viewModelMapper: RocketInfoViewModelMapper
+    private let viewModelMapper: ViewModelMapper
     
     private let imageView = UIImageView()
     private var currentRocketViewController: RocketInfoViewController?
@@ -20,9 +20,9 @@ final class RocketContainerViewController: UIViewController {
     
     init() {
         let networkManager = NetworkManagerImpl()
-        let decoder = SpaceXJSONDecoder()
+        let decoder = RocketInfoJSONDecoder()
         rocketInfoService = RocketInfoServiceImpl(networkManager: networkManager, decoder: decoder)
-        viewModelMapper = RocketInfoViewModelMapper()
+        viewModelMapper = ViewModelMapper()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,13 +84,14 @@ final class RocketContainerViewController: UIViewController {
         }
     }
     
-    private func processResult(result: Result<[RocketAPIModel], RequestError>) {
+    private func processResult(result: Result<[Rocket], RequestError>) {
         switch result {
         case .success(let results):
-            rockets = results.map(viewModelMapper.map(model:))
+            rockets = results.map(viewModelMapper.map(rocketModel:))
             
             if let firstRocket = rockets.first {
                 currentRocketViewController?.configure(with: firstRocket)
+                currentRocketViewController?.setRocketId(results.first?.id)
             }
             
             if let randomImageUrl = results.first?.flickrImages.randomElement() {

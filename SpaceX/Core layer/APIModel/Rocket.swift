@@ -1,5 +1,5 @@
 //
-//  RocketAPIModel.swift
+//  Rocket.swift
 //  SpaceX
 //
 //  Created by Margarita Slesareva on 14.04.2022.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct RocketAPIModel: Codable {
+struct Rocket: Codable {
+    let id: String
     let name: String
     let firstFlight: Date
     let country: String

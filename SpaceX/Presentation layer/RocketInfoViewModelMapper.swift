@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
-final class RocketInfoViewModelMapper {
+protocol ViewModelMapping {
     
-    static let dateFormatter: DateFormatter = {
+}
+
+final class ViewModelMapper {
+    
+    private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
@@ -17,7 +22,7 @@ final class RocketInfoViewModelMapper {
         return formatter
     }()
     
-    static let moneyFormatter: NumberFormatter = {
+    private static let moneyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 1
         formatter.numberStyle = .currency
@@ -26,16 +31,26 @@ final class RocketInfoViewModelMapper {
         return formatter
     }()
     
-    func map(model: RocketAPIModel) -> RocketViewModel {
-        let firstFlightDate = RocketInfoViewModelMapper.dateFormatter.string(from: model.firstFlight)
+    func map(launchModel: Launch) -> LaunchViewModel {
+        let dateUnix = Date(timeIntervalSince1970: launchModel.dateUnix)
+        let date = ViewModelMapper.dateFormatter.string(from: dateUnix)
         
-        
-        let launchCostTransform = Float(model.costPerLaunch) / 1000000
+        return LaunchViewModel(
+            launchImage: UIImage(),
+            name: launchModel.name,
+            date: date
+        )
+    }
     
-        let launchCost = RocketInfoViewModelMapper.moneyFormatter.string(from: NSNumber(value: launchCostTransform))
+    func map(rocketModel: Rocket) -> RocketViewModel {
+        let firstFlightDate = ViewModelMapper.dateFormatter.string(from: rocketModel.firstFlight)
+        
+        let launchCostTransform = Float(rocketModel.costPerLaunch) / 1000000
+    
+        let launchCost = ViewModelMapper.moneyFormatter.string(from: NSNumber(value: launchCostTransform))
         
         let firstStart = ParameterViewModel(value: firstFlightDate)
-        let country = ParameterViewModel(value: model.country)
+        let country = ParameterViewModel(value: rocketModel.country)
         
         var launchCostViewModel: ParameterViewModel?
         if let launchCost = launchCost {
@@ -43,21 +58,19 @@ final class RocketInfoViewModelMapper {
         }
         
         let generalInfo = GeneralInfoViewModel(
-            rocketName: model.name,
+            rocketName: rocketModel.name,
             firstStart: firstStart,
             country: country,
             launchCost: launchCostViewModel
         )
         
-        
-        
-        let heightViewModel = RocketCollectionCellViewModel(parameter: "Высота, ft", value: String(model.height.feet))
-        let diameterViewModel = RocketCollectionCellViewModel(parameter: "Диаметр, ft", value: String(model.diameter.feet))
-        let massViewModel = RocketCollectionCellViewModel(parameter: "Масса, lb", value: String(model.mass.pounds))
+        let heightViewModel = RocketCollectionCellViewModel(parameter: "Высота, ft", value: String(rocketModel.height.feet))
+        let diameterViewModel = RocketCollectionCellViewModel(parameter: "Диаметр, ft", value: String(rocketModel.diameter.feet))
+        let massViewModel = RocketCollectionCellViewModel(parameter: "Масса, lb", value: String(rocketModel.mass.pounds))
         
         var cellViewModels = [heightViewModel, diameterViewModel, massViewModel]
         
-        if let payloadWeight = model.payloadWeights.first(where: { $0.id == "leo" }) {
+        if let payloadWeight = rocketModel.payloadWeights.first(where: { $0.id == "leo" }) {
             let payloadWeightViewModel = RocketCollectionCellViewModel(
                 parameter: "Нагрузка, lb",
                 value: String(payloadWeight.lb)
@@ -66,8 +79,8 @@ final class RocketInfoViewModelMapper {
         }
         
         
-        let firstStage = mapStage(model: model.firstStage)
-        let secondStage = mapStage(model: model.secondStage)
+        let firstStage = mapStage(model: rocketModel.firstStage)
+        let secondStage = mapStage(model: rocketModel.secondStage)
         
         return RocketViewModel(
             rocketInfoModel: generalInfo,
