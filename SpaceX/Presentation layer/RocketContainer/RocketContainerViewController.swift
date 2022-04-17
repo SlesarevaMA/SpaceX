@@ -189,4 +189,12 @@ extension RocketContainerViewController: UIPageViewControllerDelegate {
         currentPage = pageNumber
         setRandomImage(for: rockets[pageNumber])
     }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return rockets.count
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return currentPage
+    }
 }
