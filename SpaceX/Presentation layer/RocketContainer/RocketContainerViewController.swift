@@ -11,6 +11,7 @@ import FittedSheets
 final class RocketContainerViewController: UIViewController {
     
     private let rocketInfoService: RocketInfoService
+    private weak var presentationAssemlby: PresentationAssemlby?
     
     private let imageView = UIImageView()
     
@@ -20,10 +21,9 @@ final class RocketContainerViewController: UIViewController {
     private var rockets = [Rocket]()
     private var currentPage: Int = 0
     
-    init() {
-        let networkManager = NetworkManagerImpl()
-        let decoder = RocketInfoJSONDecoder()
-        rocketInfoService = RocketInfoServiceImpl(networkManager: networkManager, decoder: decoder)
+    init(rocketInfoService: RocketInfoService, presentationAssemlby: PresentationAssemlby) {
+        self.rocketInfoService = rocketInfoService
+        self.presentationAssemlby = presentationAssemlby
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -91,8 +91,7 @@ final class RocketContainerViewController: UIViewController {
             rockets = results
             
             if let firstRocket = rockets.first {
-                let rocketInfoViewControler = RocketInfoViewController()
-                setupViewController(viewController: rocketInfoViewControler, with: firstRocket, pageNumber: 0)
+                let rocketInfoViewControler = setupViewController(with: firstRocket, pageNumber: 0)
                 pageViewController.setViewControllers([rocketInfoViewControler], direction: .forward, animated: false)
                 setRandomImage(for: firstRocket)
             }
@@ -117,10 +116,16 @@ final class RocketContainerViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    private func setupViewController(viewController: RocketInfoViewController, with model: Rocket, pageNumber: Int) {
-        viewController.configure(with: model)
-        viewController.pageNumber = pageNumber
-        bottomSheetViewController?.handleScrollView(viewController.scrollView)
+    private func setupViewController(with model: Rocket, pageNumber: Int) -> RocketInfoViewController {
+        guard let rocketInfoViewController = presentationAssemlby?.rocketInfoViewController() else {
+            fatalError("RocketInfoViewController not created")
+        }
+        
+        rocketInfoViewController.configure(with: model)
+        rocketInfoViewController.pageNumber = pageNumber
+        bottomSheetViewController?.handleScrollView(rocketInfoViewController.scrollView)
+        
+        return rocketInfoViewController
     }
     
     private func setRandomImage(for rocket: Rocket) {
@@ -148,10 +153,8 @@ extension RocketContainerViewController: UIPageViewControllerDataSource {
         
         let rocketIndex = currentPage - 1
         let rocket = rockets[rocketIndex]
-        let rocketInfoViewController = RocketInfoViewController()
-        setupViewController(viewController: rocketInfoViewController, with: rocket, pageNumber: rocketIndex)
-
-        return rocketInfoViewController
+        
+        return setupViewController(with: rocket, pageNumber: rocketIndex)
     }
     
     func pageViewController(
@@ -164,10 +167,8 @@ extension RocketContainerViewController: UIPageViewControllerDataSource {
         
         let rocketIndex = currentPage + 1
         let rocket = rockets[rocketIndex]
-        let rocketInfoViewController = RocketInfoViewController()
-        setupViewController(viewController: rocketInfoViewController, with: rocket, pageNumber: rocketIndex)
         
-        return rocketInfoViewController
+        return setupViewController(with: rocket, pageNumber: rocketIndex)
     }
 }
 

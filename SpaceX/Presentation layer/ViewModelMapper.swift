@@ -1,5 +1,5 @@
 //
-//  RocketInfoViewModelMapper.swift
+//  ViewModelMapper.swift
 //  SpaceX
 //
 //  Created by Margarita Slesareva on 14.04.2022.
@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-protocol ViewModelMapping {
-    
+protocol ViewModelMapper {
+    func map(launchModel: Launch) -> LaunchViewModel
+    func map(rocketModel: Rocket) -> RocketViewModel
 }
 
-final class ViewModelMapper {
+final class ViewModelMapperImpl: ViewModelMapper {
     
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -33,7 +34,7 @@ final class ViewModelMapper {
     
     func map(launchModel: Launch) -> LaunchViewModel {
         let dateUnix = Date(timeIntervalSince1970: launchModel.dateUnix)
-        let date = ViewModelMapper.dateFormatter.string(from: dateUnix)
+        let date = Self.dateFormatter.string(from: dateUnix)
         
         return LaunchViewModel(
             launchImage: UIImage(),
@@ -43,10 +44,10 @@ final class ViewModelMapper {
     }
     
     func map(rocketModel: Rocket) -> RocketViewModel {
-        let firstFlightDate = ViewModelMapper.dateFormatter.string(from: rocketModel.firstFlight)
+        let firstFlightDate = Self.dateFormatter.string(from: rocketModel.firstFlight)
         
         let launchCostMillions = Float(rocketModel.costPerLaunch) / 1000000
-        let launchCost = ViewModelMapper.moneyFormatter.string(from: NSNumber(value: launchCostMillions))
+        let launchCost = Self.moneyFormatter.string(from: NSNumber(value: launchCostMillions))
         
         let firstStart = ParameterViewModel(value: firstFlightDate)
         let country = ParameterViewModel(value: rocketModel.country)

@@ -18,7 +18,8 @@ final class RocketInfoViewController: UIViewController {
     
     let scrollView = UIScrollView()
     
-    private let viewModelMapper = ViewModelMapper()
+    private let viewModelMapper: ViewModelMapper
+    private weak var presentationAssemlby: PresentationAssemlby?
     
     private let contentView = UIView()
     private let generalView = GeneralInfoView()
@@ -30,6 +31,17 @@ final class RocketInfoViewController: UIViewController {
     
     private var rocketId: String?
     private var rocketName: String?
+    
+    init(viewModelMapper: ViewModelMapper, presentationAssemlby: PresentationAssemlby) {
+        self.viewModelMapper = viewModelMapper
+        self.presentationAssemlby = presentationAssemlby
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,7 +163,10 @@ final class RocketInfoViewController: UIViewController {
     }
     
     @objc private func showLaunches() {
-        let launchesViewController = LaunchesViewController()
+        guard let launchesViewController = presentationAssemlby?.launchesViewController() else {
+            return
+        }
+        
         launchesViewController.rocketId = rocketId
         launchesViewController.rocketName = rocketName
         
