@@ -11,18 +11,19 @@ import FittedSheets
 final class RocketContainerViewController: UIViewController {
     
     private let rocketInfoService: RocketInfoService
-    private let viewModelMapper: ViewModelMapper
     
     private let imageView = UIImageView()
-    private var currentRocketViewController: RocketInfoViewController?
     
-    private var rockets = [RocketViewModel]()
+    private var bottomSheetViewController: SheetViewController?
+    private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    
+    private var rockets = [Rocket]()
+    private var currentPage: Int = 0
     
     init() {
         let networkManager = NetworkManagerImpl()
         let decoder = RocketInfoJSONDecoder()
         rocketInfoService = RocketInfoServiceImpl(networkManager: networkManager, decoder: decoder)
-        viewModelMapper = ViewModelMapper()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,14 +52,15 @@ final class RocketContainerViewController: UIViewController {
     }
     
     private func addBottomSheet() {
-        let rocketInfoViewController = RocketInfoViewController()
+        pageViewController.dataSource = self
+        pageViewController.delegate = self
         
         var options = SheetOptions()
         options.presentingViewCornerRadius = 32
         options.pullBarHeight = 48
         
         let bottomSheet = SheetViewController(
-            controller: rocketInfoViewController,
+            controller: pageViewController,
             sizes: [.percent(0.5), .percent(0.7), .percent(1)],
             options: options
         )
@@ -68,12 +70,11 @@ final class RocketContainerViewController: UIViewController {
         view.addSubview(bottomSheet.view)
         addChild(bottomSheet)
         bottomSheet.didMove(toParent: self)
-        
-        bottomSheet.handleScrollView(rocketInfoViewController.scrollView)
+
         bottomSheet.resize(to: .percent(0.7), animated: false)
         bottomSheet.gripSize = .zero
         
-        currentRocketViewController = rocketInfoViewController
+        bottomSheetViewController = bottomSheet
     }
     
     private func requestRockets() {
@@ -87,19 +88,13 @@ final class RocketContainerViewController: UIViewController {
     private func processResult(result: Result<[Rocket], RequestError>) {
         switch result {
         case .success(let results):
-            rockets = results.map(viewModelMapper.map(rocketModel:))
+            rockets = results
             
             if let firstRocket = rockets.first {
-                currentRocketViewController?.configure(with: firstRocket)
-                currentRocketViewController?.setRocketId(results.first?.id)
-            }
-            
-            if let randomImageUrl = results.first?.flickrImages.randomElement() {
-                rocketInfoService.requestImage(at: randomImageUrl) { image in
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                    }
-                }
+                let rocketInfoViewControler = RocketInfoViewController()
+                setupViewController(viewController: rocketInfoViewControler, with: firstRocket, pageNumber: 0)
+                pageViewController.setViewControllers([rocketInfoViewControler], direction: .forward, animated: false)
+                setRandomImage(for: firstRocket)
             }
         case .failure(let error):
             handleError(error)
@@ -120,5 +115,78 @@ final class RocketContainerViewController: UIViewController {
         
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func setupViewController(viewController: RocketInfoViewController, with model: Rocket, pageNumber: Int) {
+        viewController.configure(with: model)
+        viewController.pageNumber = pageNumber
+        bottomSheetViewController?.handleScrollView(viewController.scrollView)
+    }
+    
+    private func setRandomImage(for rocket: Rocket) {
+        guard let randomImageUrl = rocket.flickrImages.randomElement() else {
+            return
+        }
+
+        rocketInfoService.requestImage(at: randomImageUrl) { image in
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
+        }
+    }
+}
+
+extension RocketContainerViewController: UIPageViewControllerDataSource {
+    
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+    ) -> UIViewController? {
+        guard currentPage > 0 else {
+            return nil
+        }
+        
+        let rocketIndex = currentPage - 1
+        let rocket = rockets[rocketIndex]
+        let rocketInfoViewController = RocketInfoViewController()
+        setupViewController(viewController: rocketInfoViewController, with: rocket, pageNumber: rocketIndex)
+
+        return rocketInfoViewController
+    }
+    
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+    ) -> UIViewController? {
+        guard currentPage < rockets.count - 1 else {
+            return nil
+        }
+        
+        let rocketIndex = currentPage + 1
+        let rocket = rockets[rocketIndex]
+        let rocketInfoViewController = RocketInfoViewController()
+        setupViewController(viewController: rocketInfoViewController, with: rocket, pageNumber: rocketIndex)
+        
+        return rocketInfoViewController
+    }
+}
+
+extension RocketContainerViewController: UIPageViewControllerDelegate {
+    
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        didFinishAnimating finished: Bool,
+        previousViewControllers: [UIViewController],
+        transitionCompleted completed: Bool
+    ) {
+        guard completed else {
+            return
+        }
+  
+        // Текущий viewController в viewControllers всегда первый
+        let pageNumber = (pageViewController.viewControllers?.first as? RocketInfoViewController)?.pageNumber ?? 0
+        
+        currentPage = pageNumber
+        setRandomImage(for: rockets[pageNumber])
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 final class LaunchesViewController: UIViewController {
     
     var rocketId: String?
+    var rocketName: String?
     
     private let launchesService: LaunchesService = LaunchesServiceImpl(networkManager: NetworkManagerImpl(), decoder: RocketInfoJSONDecoder())
     private let viewModelMapper = ViewModelMapper()
@@ -58,6 +59,7 @@ final class LaunchesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = false
+        navigationItem.title = rocketName
     }
     
     override func viewWillDisappear(_ animated: Bool) {

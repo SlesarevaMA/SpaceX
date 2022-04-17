@@ -14,7 +14,11 @@ private enum Metrics {
 
 final class RocketInfoViewController: UIViewController {
     
+    var pageNumber = 0
+    
     let scrollView = UIScrollView()
+    
+    private let viewModelMapper = ViewModelMapper()
     
     private let contentView = UIView()
     private let generalView = GeneralInfoView()
@@ -25,6 +29,7 @@ final class RocketInfoViewController: UIViewController {
     private var parameters = [RocketCollectionCellViewModel]()
     
     private var rocketId: String?
+    private var rocketName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,24 +136,26 @@ final class RocketInfoViewController: UIViewController {
         secondStageView.stageNumberLabel.text = "ВТОРАЯ СТУПЕНЬ"
     }
     
-    func setRocketId(_ rocketId: String?) {
-        self.rocketId = rocketId
-    }
-    
-    func configure(with model: RocketViewModel) {
-        generalView.configure(with: model.rocketInfoModel)
-        firstStageView.configureModel(model.firstStageModel)
-        secondStageView.configureModel(model.secondStageModel)
-        parameters = model.cellViewModels
+    func configure(with model: Rocket) {
+        let viewModel = viewModelMapper.map(rocketModel: model)
+        
+        generalView.configure(with: viewModel.rocketInfoModel)
+        firstStageView.configureModel(viewModel.firstStageModel)
+        secondStageView.configureModel(viewModel.secondStageModel)
+        
+        rocketName = model.name
+        rocketId = model.id
+        
+        parameters = viewModel.cellViewModels
         generalView.collectionView.reloadData()
     }
     
     @objc private func showLaunches() {
         let launchesViewController = LaunchesViewController()
         launchesViewController.rocketId = rocketId
+        launchesViewController.rocketName = rocketName
         
         navigationController?.pushViewController(launchesViewController, animated: true)
-//        present(launchesViewController, animated: true)
     }
 }
 
@@ -158,7 +165,10 @@ extension RocketInfoViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RocketParametersViewCell", for: indexPath) as? RocketParametersViewCell  else {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "RocketParametersViewCell",
+            for: indexPath
+        ) as? RocketParametersViewCell  else {
             fatalError("Unable to dequeue RocketParametersViewCell")
         }
         

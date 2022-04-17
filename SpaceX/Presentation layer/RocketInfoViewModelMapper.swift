@@ -45,9 +45,8 @@ final class ViewModelMapper {
     func map(rocketModel: Rocket) -> RocketViewModel {
         let firstFlightDate = ViewModelMapper.dateFormatter.string(from: rocketModel.firstFlight)
         
-        let launchCostTransform = Float(rocketModel.costPerLaunch) / 1000000
-    
-        let launchCost = ViewModelMapper.moneyFormatter.string(from: NSNumber(value: launchCostTransform))
+        let launchCostMillions = Float(rocketModel.costPerLaunch) / 1000000
+        let launchCost = ViewModelMapper.moneyFormatter.string(from: NSNumber(value: launchCostMillions))
         
         let firstStart = ParameterViewModel(value: firstFlightDate)
         let country = ParameterViewModel(value: rocketModel.country)
